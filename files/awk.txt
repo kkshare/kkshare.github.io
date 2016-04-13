@@ -1,0 +1,45 @@
+awk -v onstr="$onstr" -v offstr="$offstr" -v debug=$debug -v max=3000000 'BEGIN{
+     session="";
+     serial="";
+     id="";
+     msg="";
+     begin=0;
+     end=0;
+     delta=0;
+     sum=0;
+     num=0;
+     _min=max;
+     _max=0;
+}
+{
+     t=substr($0,2,19);
+     t=mktime(gensub(":"," ","g",gensub("-"," ","g",t)));
+     t=t""substr($0,22,3);
+     session=$5; 
+     serial=$7; 
+     id=$8; 
+     msg=$10;
+     if (index(msg,onstr)||index(msg,offstr)) {
+          if (session==$5&&serial==$7) {
+               if (index(msg,onstr)) {
+                    begin=t;end=0;delta=0;
+               }else if (begin&&index(id,"[88")){
+                    end=t;delta=end-begin;
+                    if (delta<max&&delta>=0){
+                         sum+=delta;num++;
+                         if (delta<_min){_min=delta;minpos=NR;}
+                         if (delta>_max) {_max=delta;maxpos=NR;}
+                    }
+               }
+          } else {
+               if (index(msg,onstr)) {begin=t;end=0;delta=0;}
+          } if (debug)
+               print $0,begin,end,delta,sum,num;
+     }
+}
+END{
+     if (num>0) {
+          print "sum:"sum"ms","num:"num,"average:"sum/num"ms","min:"_min"ms(minpos:"minpos")","max:"_max"ms(maxpos:"maxpos")";
+     }else
+          print "not found";
+}'
