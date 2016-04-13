@@ -3,7 +3,7 @@ layout: post
 title: "berkeleyDB"
 description: ""
 category: "tech"
-tags: [bdb,berkeleyDB,database]
+tags: [berkeleyDB,database]
 
 ---
 {% include JB/setup %}

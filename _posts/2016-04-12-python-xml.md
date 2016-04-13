@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "python xml ElementTree"
-description: ""
+title: "python xml"
+description: "deal xml with python(ElementTree)"
 category: "tech"
-tags: [python,xml,ElementTree]
+tags: [python,xml]
 
 ---
 {% include JB/setup %}

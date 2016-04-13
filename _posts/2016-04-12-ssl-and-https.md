@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "security and https"
-description: "security and https"
+title: "ssl and https"
+description: "ssl and https"
 category: "tech"
-tags: [security,https,ssl]
+tags: [security,ssl/https]
 
 ---
 {% include JB/setup %}

@@ -3,7 +3,7 @@ layout: post
 title: "sample code of c"
 description: "sample code of c"
 category: "tech"
-tags: [c,sample code]
+tags: [c/c++,sample code]
 
 ---
 {% include JB/setup %}

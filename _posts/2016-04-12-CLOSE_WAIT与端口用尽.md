@@ -3,7 +3,7 @@ layout: post
 title: "CLOSE_WAIT与端口用尽"
 description: "CLOSE_WAIT与端口用尽"
 category: "tech"
-tags: [socket,tcp,CLOSE_WAIT]
+tags: [socket,tcp-ip]
 
 ---
 {% include JB/setup %}

@@ -3,7 +3,7 @@ layout: post
 title: "MobaXterm"
 description: "MobaXterm"
 category: "tech"
-tags: [MobaXterm,tool]
+tags: [MobaXterm,实用工具与软件]
 
 ---
 {% include JB/setup %}

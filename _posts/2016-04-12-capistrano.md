@@ -3,7 +3,7 @@ layout: post
 title: "capistrano"
 description: ""
 category: "tech"
-tags: [capistrano,cloud,cap]
+tags: [capistrano,cloud]
 
 ---
 {% include JB/setup %}

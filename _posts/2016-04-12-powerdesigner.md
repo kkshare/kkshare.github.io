@@ -3,7 +3,7 @@ layout: post
 title: "powerdesigner"
 description: "powerdesigner"
 category: "tech"
-tags: [powerdesigner,tool]
+tags: [powerdesigner,实用工具与软件]
 
 ---
 {% include JB/setup %}
