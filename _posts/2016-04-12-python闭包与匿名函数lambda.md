@@ -3,7 +3,7 @@ layout: post
 title: "python闭包与匿名函数lambda"
 description: "python闭包与匿名函数lambda"
 category: "tech"
-tags: [python,闭包,匿名函数,lambda]
+tags: [python,闭包/匿名函数/lambda]
 
 ---
 {% include JB/setup %}

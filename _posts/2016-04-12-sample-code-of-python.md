@@ -2,7 +2,7 @@
 layout: post
 title: "sample code of python"
 description: "sample code of python"
-category: tech
+category: "tech"
 tags: [python,sample code]
 
 ---

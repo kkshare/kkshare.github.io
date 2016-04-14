@@ -3,7 +3,7 @@ layout: post
 title: "Ehcache vs MemCached"
 description: ""
 category: "tech"
-tags: [Ehcache,MemCached]
+tags: [java,MemCached]
 
 ---
 {% include JB/setup %}

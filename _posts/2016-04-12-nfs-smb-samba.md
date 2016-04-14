@@ -3,7 +3,7 @@ layout: post
 title: "nfs smb samba"
 description: ""
 category: "tech"
-tags: [nfs,smb,samba]
+tags: [nfs/smb/samba]
 
 ---
 {% include JB/setup %}

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "js"
-description: ""
+title: "javascript"
+description: "javascript"
 category: "tech"
-tags: [javascript,jquery,ajax]
+tags: [javascript/jquery/ajax]
 
 ---
 {% include JB/setup %}

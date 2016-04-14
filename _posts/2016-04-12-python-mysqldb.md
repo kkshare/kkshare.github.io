@@ -2,7 +2,7 @@
 layout: post
 title: "python mysqldb"
 description: ""
-category: tech
+category: "tech"
 tags: [python,mysqldb]
 
 ---

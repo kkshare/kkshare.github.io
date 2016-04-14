@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "用python快速搭建小型web:web.py flask"
-description: "用python快速搭建小型web:web.py flask"
+title: "用python快速搭建小型webserver"
+description: "用python快速搭建小型webserver"
 category: "tech"
-tags: [python,web.py,flask,web server]
+tags: [python,快速小型webserver]
 
 ---
 {% include JB/setup %}
