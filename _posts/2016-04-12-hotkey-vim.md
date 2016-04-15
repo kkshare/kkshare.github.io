@@ -7,7 +7,6 @@ tags: [hotkey]
 
 ---
 {% include JB/setup %}
-
 ## 常用命令
 
     hjkl	#移动光标
