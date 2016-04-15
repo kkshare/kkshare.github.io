@@ -4,6 +4,7 @@ title: "sample code of java"
 description: "sample code of java"
 category: "tech"
 tags: [java,sample code]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

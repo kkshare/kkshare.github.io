@@ -4,6 +4,7 @@ title: "capistrano"
 description: ""
 category: "tech"
 tags: [capistrano,cloud]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

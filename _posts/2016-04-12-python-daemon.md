@@ -4,6 +4,7 @@ title: "python daemon"
 description: "python daemon"
 category: "tech"
 tags: [python,daemon]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

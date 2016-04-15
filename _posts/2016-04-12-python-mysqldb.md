@@ -4,6 +4,7 @@ title: "python mysqldb"
 description: ""
 category: "tech"
 tags: [python,mysqldb]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

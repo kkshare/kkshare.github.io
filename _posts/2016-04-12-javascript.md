@@ -4,6 +4,7 @@ title: "javascript"
 description: "javascript"
 category: "tech"
 tags: [javascript/jquery/ajax]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

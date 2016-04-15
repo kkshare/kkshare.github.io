@@ -4,6 +4,7 @@ title: "python闭包与匿名函数lambda"
 description: "python闭包与匿名函数lambda"
 category: "tech"
 tags: [python,闭包/匿名函数/lambda]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

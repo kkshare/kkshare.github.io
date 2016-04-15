@@ -4,6 +4,7 @@ title: "Cubieboard:盒子服务器"
 description: "Cubieboard:盒子服务器"
 category: "tech"
 tags: [Cubieboard]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

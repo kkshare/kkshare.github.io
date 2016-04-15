@@ -4,6 +4,7 @@ title: "sample code of python"
 description: "sample code of python"
 category: "tech"
 tags: [python,sample code]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

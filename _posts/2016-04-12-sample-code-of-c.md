@@ -4,6 +4,7 @@ title: "sample code of c"
 description: "sample code of c"
 category: "tech"
 tags: [c/c++,sample code]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

@@ -4,6 +4,7 @@ title: "ssl and https"
 description: "ssl and https"
 category: "tech"
 tags: [security,ssl/https]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

@@ -4,6 +4,7 @@ title: "hotkey iTerm"
 description: ""
 category: "memo"
 tags: [hotkey]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}

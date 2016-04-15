@@ -4,6 +4,7 @@ title: "nfs smb samba"
 description: ""
 category: "tech"
 tags: [nfs/smb/samba]
+tagline: "2016-04-15"
 
 ---
 {% include JB/setup %}
