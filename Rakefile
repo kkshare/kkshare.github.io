@@ -9,6 +9,7 @@ CONFIG = {
   'themes' => File.join(SOURCE, "_includes", "themes"),
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
+  'memo' => File.join(SOURCE, "memo"),
   'post_ext' => "md",
   'theme_package_version' => "0.1.0"
 }
@@ -100,6 +101,41 @@ task :page do
     post.puts "{% include JB/setup %}"
   end
 end # task :page
+
+# Usage: rake memo title="A Title" [date="2012-02-09"] [tags=[tag1,tag2]] [category="category"]
+desc "Create a new memo in #{CONFIG['memo']}"
+task :memo do
+  abort("rake aborted: '#{CONFIG['memo']}' directory not found.") unless FileTest.directory?(CONFIG['memo'])
+  title = ENV["title"] || "new-page"
+  tags = ENV["tags"] || "[]"
+  category = ENV["category"] || ""
+  category = "\"#{category.gsub(/-/,' ')}\"" if !category.empty?
+  slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+  begin
+    date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
+  rescue => e
+    puts "Error - date format must be YYYY-MM-DD, please check you typed it correctly!"
+    exit -1
+  end
+  filename = File.join(CONFIG['memo'], "#{slug}.#{CONFIG['post_ext']}")
+  if File.exist?(filename)
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+  end
+
+  puts "Creating new memo: #{filename}"
+  open(filename, 'w') do |post|
+    post.puts "---"
+    post.puts "layout: memo"
+    post.puts "title: \"#{title.gsub(/-/,' ')}\""
+    post.puts 'description: ""'
+    post.puts "category: #{category}"
+    post.puts "tags: #{tags}"
+    post.puts "tagline: \"#{date}\""
+    post.puts ""
+    post.puts "---"
+    post.puts "{% include JB/setup %}"
+  end
+end # task :memo
 
 desc "Launch preview environment"
 task :preview do

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: memo
 title: "hotkey emacs"
 description: ""
 category: "memo"

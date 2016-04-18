@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: memo
 title: "hotkey MicroEmacs"
 description: ""
 category: "memo"
