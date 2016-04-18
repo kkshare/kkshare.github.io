@@ -1,8 +1,8 @@
 ---
-layout: memo
+layout: post
 title: "hotkey vim"
 description: ""
-category: "memo"
+category: memo
 tags: [hotkey]
 tagline: "2016-04-15"
 

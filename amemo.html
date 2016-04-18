@@ -1,0 +1,17 @@
+---
+layout: page
+title: 备忘录
+header: Pages
+group: navigation
+---
+{% include JB/setup %}
+
+{% for category in site.categories %} 
+  {% if category[0] == 'memo' %}
+  <ul>
+    {% assign pages_list = category[1] %}  
+    {% include JB/pages_list %}
+  </ul>
+  {% endif %}
+{% endfor %}
+
