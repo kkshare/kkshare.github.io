@@ -5,6 +5,7 @@ description: ""
 category: memo
 tags: [hotkey]
 tagline: "2016-04-15"
+date: "2016-04-18"
 
 ---
 {% include JB/setup %}
@@ -21,6 +22,8 @@ macbook
     cmd-shift-3 全屏截图
     cmd-shift-4 按space，再单击鼠标  窗口截图
     cmd-shift-4 选择区域，释放鼠标    区域截图
+
+    ctrl-cmd-D 屏幕取词
 
 mou
 

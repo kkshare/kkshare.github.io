@@ -48,7 +48,7 @@ task :post do
   title = ENV["title"] || "new-post"
   tags = ENV["tags"] || "[]"
   category = ENV["category"] || ""
-  category = "\"#{category.gsub(/-/,' ')}\"" if !category.empty?
+  category = "#{category.gsub(/-/,' ')}" if !category.empty?
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   begin
     date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
@@ -69,7 +69,7 @@ task :post do
     post.puts 'description: ""'
     post.puts "category: #{category}"
     post.puts "tags: #{tags}"
-    post.puts "tagline: \"#{date}\""
+    post.puts "date: \"#{date}\""
     post.puts ""
     post.puts "---"
     post.puts "{% include JB/setup %}"
