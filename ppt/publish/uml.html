@@ -1,0 +1,478 @@
+---
+layout: null
+title : "精简版UML - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>精简版UML - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>精简版UML</h1>
+<p><small>2016-04-26 演讲者：何通庆</small></p>
+<p><a href="https://tt8x.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>需要思考的问题：</p>
+<ul>
+<li>常用到的流程图是什么？</li>
+<li>架构图又是什么？</li>
+<li>各图之间的关系？</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>主要内容</h1>
+<h2>关系</h2>
+<h2>用例图</h2>
+<h2>活动图</h2>
+<h2>交互图</h2>
+<h2>物理视图</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>关系</h1>
+
+</hgroup><article>
+
+<ul>
+<li>包括：泛化关系、实现关系、依赖关系、关联关系</li>
+<li><em>泛化关系</em>：对应java关键字extends</li>
+<li><em>实现关系</em>：对应java关键字implements</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><em>泛化关系</em></th>
+<th><em>实现关系</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../images/umlextend.png" alt=""></td>
+<td><img src="../../images/umlimpl.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>关系</h1>
+<table>
+<thead>
+<tr>
+<th><em>依赖关系</em>(或称<em>使用关系</em>)</th>
+<th><em>关联关系</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单向</td>
+<td>一般是平等的,单箭头表示单向，双箭头或无箭头表示双向</td>
+</tr>
+<tr>
+<td>偶然性、临时性、非常弱的</td>
+<td>非临时的，非偶然的，强依赖关系</td>
+</tr>
+<tr>
+<td>体现在局部变量，方法中的参数，静态方法的调用</td>
+<td>成员变量或关联类A引用被关联类B的全局变量</td>
+</tr>
+<tr>
+<td><img src="../../images/umldepend.png" alt=""></td>
+<td><img src="../../images/umldepend2.png" alt=""></td>
+</tr>
+<tr>
+<td></td>
+<td>每个端点有一个基数表示关联的类可以有几个实例</td>
+</tr>
+</tbody>
+</table>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>关系--总结</h1>
+<ul class="zoomIn">
+<li>如果被关联类B是关联类A的成员变量，而且是1:1的关系，B类比较简单的话，B类可以不用画出来</li>
+<li>聚合关系与组合关系都是关联关系的一种特例，本人不建议在实际项目的设计中使用<ul class="zoomIn">
+<li>抽象，增加学习难度，降低可读性（太学术）</li>
+<li>在代码层面与关联关系是一致的，只能从语义基本来区分（另一个角度来看就是逆向工程中不可逆）</li>
+<li>所谓模型就是对现实的简化，复杂的东西应该剪裁或少使用</li>
+<li>符合公司企业文化：简单</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>关系--总结</h1>
+<ul class="zoomIn">
+<li>本人觉得泛化关系与实现关系混用，或者只使用一个就行<ul class="zoomIn">
+<li>线条过于抽象，增加学习成本</li>
+<li>他们都能表示纵向关系</li>
+<li>具体环境(类图/代码)中好区分，或添加注释</li>
+</ul>
+</li>
+<li><em>纵向关系</em>：泛化关系、实现关系</li>
+<li><em>横向关系</em>：依赖关系、关联关系</li>
+<li>实际语言中“使用”一般表示依赖关系，“调用”一般表示关联关系</li>
+<li>以上关系与图形在其他视图中都能够使用，表达相同或类似关系</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>用例图</h1>
+
+</hgroup><article>
+
+<ul class="zoomIn">
+<li>元素<div class="columns2">
+  <img src="../../images/umlusercase.png">
+  <div>
+      参与者<br><br>
+      用例<br><br>
+      子系统
+  </div></div></li>
+<li>用例图中关系<br><img src="../../images/umlusercase2.png" alt=""></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>用例图</h1>
+<ul>
+<li>建议用关联关系与包含关系即可</li>
+<li>例子<br><img src="../../images/umlusercase3.png" alt=""></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>状态机视图</h1>
+<ul>
+<li>通过对类对象的生存周期建立模型来描述对象随时间变化的动态行为</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<ul>
+<li>参考 <a href="http://blog.csdn.net/zzxian/article/details/6781434" target="_blank">http://blog.csdn.net/zzxian/article/details/6781434</a></li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h1>活动图</h1>
+
+</hgroup><article>
+
+<ul class="zoomIn">
+<li>活动图在本质上是一种流程图</li>
+<li>活动图着重表现从一个活动到另一个活动的控制流</li>
+<li>活动图和交互图是UML中对系统动态方面建模的两种主要形式</li>
+<li>交互图强调的是对象到对象的控制流</li>
+<li>活动图则强调的是从活动到活动的控制流</li>
+<li>活动图是一种表述过程基理、业务过程以及工作流的技术</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>活动图</h1>
+<div class="columns2">
+    元素：分支、分岔、汇合
+    <img src="../../images/umlflow.png">
+</div><ul>
+<li>示例<br><img src="../../images/umlflow2.png" alt=""></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<ul>
+<li>是否采用泳道：主要根据活动图中是否要体现出活动的不同实施者(职责单位),该图能够有效地体现出所有职责单位之间的工作职责，业务范围及之间的交互关系、信息流程</li>
+<li>一张图尽量只包含一个焦点:在一张图中显示出系统中所有的控制流是不可能的，除非系统很小</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>活动图---如何绘制与绘制策略</h1>
+<ul class="zoomIn">
+<li>首先决定是否采用泳道,以区别职责单位</li>
+<li>尽量使用分支、分岔和汇合等基本元素来描述活动控制流程</li>
+<li>如果需要，加入对象流以及对象的状态变化（对重要对象）</li>
+<li>关键是表示出控制流，其它元素都是围绕这一宗旨所进行的补充</li>
+<li>一张图尽量只包含一个焦点</li>
+<li>将复杂的活动或多次出现的活动集合归到一个活动节点</li>
+<li>复杂活动通过辅助活动图或子活动图来表示</li>
+<li>识别工作流初始节点的前置条件和活动终点的后置条件，可有效地确定工作流的边界</li>
+<li>先从工作流的顺序开始，然后考虑分支，接着再考虑分岔和汇合</li>
+<li>对操作建模：每一个对象占据一个泳道，而活动则是该对象的成员方法</li>
+<li>viso画图时用<em>用例图</em>中的<em>系统边界</em>代替<em>泳道</em>，容易编辑</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>交互图</h2>
+<ul class="zoomIn">
+<li>交互图分为<em>顺序图(序列图)</em>与<em>协作图(通讯图)</em></li>
+<li>顺序图与协作图可以相互转换。顺序图例子：<br><img src="../../images/umlactive.png" alt=""></li>
+<li>对象下面元素：虚线-生命线，双实线-控制焦点，叉叉-生命结束</li>
+<li>对象由“名字:类型”组成，一般可以省略名字。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>交互图</h1>
+<ul>
+<li><em>组合片段</em>:用来解决交互执行的条件及方式<br><img src="../../images/umlactive2.png" height="150"></li>
+<li>常用组合片段<ul>
+<li>Opt     : 选项,包含一个可能发生或可能不发生的序列</li>
+<li>Alt     : 抉择</li>
+<li>Loop    : 循环</li>
+<li>Break   : 中断</li>
+<li>Par     : 并行</li>
+<li>Critical: 关键</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>交互图</h1>
+<ul>
+<li>协作图(通讯图)例子<br><img src="../../images/umlcooperate.png" alt=""></li>
+<li>协作图主要元素：<ul>
+<li>消息编号</li>
+<li>迭代标记：用*号表示，表示循环，通常还有迭代表达式</li>
+<li>监护条件(约束)：通常是用来表示分支，格式是[Boolean Test]</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>交互图总结</h1>
+<ul class="zoomIn">
+<li>在通讯图中使用监护条件一定要有所限制</li>
+<li>通常应只列出主要监护条件，否则影响其阅读</li>
+<li>如果需要，尽可能还是通过顺序图来表示</li>
+<li>序列图与协作图一般情况画一种就行了</li>
+<li>序列图是对象之间的关系，而不是类的关系，是动态图</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>静态图与动态图</h1>
+<ul class="zoomIn">
+<li>静态图：类图，对象图，构建图，部署图...</li>
+<li>动态图：序列图，通讯图，用例图，状态机图...</li>
+<li>逆向工程只能生成静态图，不能生成动态图</li>
+<li>逆向工程无法生成表示聚合、组合关系的类图</li>
+<li>动态图主要表现对象、示例、具体角色之间的关系、状态</li>
+<li>静态图与动态图互为补充</li>
+<li>用例图、序列图属于动态图</li>
+<li>序列图是对象之间的关系，而不是类的关系，是动态图</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>物理视图之组件视图</h1>
+<ul class="zoomIn">
+<li>组件/构件：系统中可重用的块包装成具有可替代性的物理单元</li>
+<li>用组件以及组件之间的接口与依赖关系来表示设计元素的具体实现</li>
+<li>组件是系统<em>高层</em>的可重用的组成部件</li>
+<li>组件视图又称实现视图、构件视图</li>
+<li>组件可以嵌套
+<img src="../../images/umlcom.png" height="400"></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>物理视图之部署视图</h1>
+<ul class="zoomIn">
+<li>表示运行时计算资源的物理布置,这些运行的资源称为<em>节点</em></li>
+<li><em>节点</em>可以是打印机、服务器等有存储空间与处理能力的实体</li>
+<li><em>节点</em>用长方体表示</li>
+<li>如果含有依赖关系的组件实例放置在不同节点上，可以展示执行过程中的瓶颈</li>
+<li>单机程序不需要部署图</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>物理视图之部署视图</h1>
+<ul>
+<li>部署视图分描述层与实例层<ul>
+<li>描述层包括内部组件以及组件之间关系的表示<br><img src="../../images/umlcom2.png" alt=""><br>我们可以增加{约束}来对连接及节点进行描述</li>
+<li>实例层只有简单的框图<br><img src="../../images/umlcom3.png" alt=""></li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>模型管理视图</h1>
+<ul>
+<li>大系统分成小单元，使得人们可以一次只处理有限的信息</li>
+<li>使分别处理这些信息的工作组之间不会互相干扰</li>
+<li>由包及包之间的依赖关系组成</li>
+<li>很少用</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>总结：UML图的种类</h1>
+<img src="../../images/umltypes.png" alt="">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>补充：4+1视图模型</h1>
+<ul>
+<li>参考 <a href="http://blog.csdn.net/sunchaohuang/article/details/1669390" target="_blank">这里</a></li>
+<li>Kruchten 提出了一个&quot;4+1&quot;视图模型，从5个不同的视角包括包括逻辑试图、进程视图、物理视图、开发视图、场景视图来描述软件体系结构。每一个视图只关心系统的一个侧面，5个视图结合在一起才能反映系统的软件体系结构的全部内容。</li>
+</ul>
+<img src="../../images/uml5views.png" alt="">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>补充：4+1视图模型</h1>
+<ul>
+<li>4+1视图与UML对应关系</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>4+1视图</th>
+<th>UML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>场景视图</td>
+<td>用例图</td>
+</tr>
+<tr>
+<td>逻辑视图</td>
+<td>类图</td>
+</tr>
+<tr>
+<td>开发视图</td>
+<td>类图、组件图</td>
+</tr>
+<tr>
+<td>进程视图</td>
+<td>无完全对应</td>
+</tr>
+<tr>
+<td>物理视图</td>
+<td>部署图</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><em>进程视图</em>：侧重系统的运行特性，关注非功能性的需求（性能，可用性）。服务于系统集成人员，方便后续性能测试。强调并发性、分布性、集成性、鲁棒性（容错）、可扩充性、吞吐量等。</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>补充：4+1视图模型</h1>
+<ul>
+<li>相互关系<ul class="zoomIn">
+<li>将四个视图有机地联系起来。可以描述一个特定的视图内的构件关系，也可以描述不同视图间的构件关系。文本、图形表示皆可。</li>
+<li>逻辑视图、开发视图，都主要是用来描述系统的静态结构。</li>
+<li>进程视图、物理视图，主要是用来描述系统的动态结构。</li>
+<li>并非每个系统都必须把5个视图都画出来，而是各有侧重。例如MIS系统侧重于逻辑视图、开发视图，而实时控制系统则侧重于进程视图、物理视图</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>thanks</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>

@@ -1,6 +1,6 @@
 ---
 layout: null
-title : nodeppt template 1
+title : "ppt template 1 - By kk"
 ---
 <!--
     Powered By nodePPT - This is probably the best web presentation tool so far!
@@ -19,35 +19,147 @@ title : nodeppt template 1
     <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
     
-<link rel="stylesheet" href="./css/theme.moon.css">
+<link rel="stylesheet" href="./css/theme.dark.css">
 </head>
 <body>
 <div class="slides">
     <slides id="container">
-        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>封面样式</h1>
-<h2>h1是作为封面用的，内部的都用h2</h2>
+        <slide class="slide hasnote"><aside class="note">
+<section>
+<ul>
+<li>这是备注，按键盘“N”显示</li>
+<li>transition: 转场动画，包括
+kontext vkontext circle earthquake cards glue stick move newspaper
+slide slide2 slide3
+horizontal3d horizontal vertical3d zoomin zoomout pulse</li>
+<li>theme: 皮肤，包括 moon color blue green dark light</li>
+<li>usemathjax: yes 启用MathJax渲染公式</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>演讲主题</h1>
+<h2>二级标题</h2>
+<p><small>2016-04-26 演讲者：xxx</small></p>
 
 </article></section></slide>
-<slide class="slide fill" style="background-image:url('./img/bg1.png')"><section class="slide-wrapper"><article class="flexbox vleft">
-<h1>背景图片</h1>
-<h2>使用方法：&#91;slide style=&quot;background-image:url(&#39;/img/bg1.png&#39;)&quot;&#93;</h2>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<ul>
+<li>标题或列表第一条加上：“ {:&amp;.flexbox.vleft}”</li>
+<li>默认居中对齐</li>
+<li>注意空格</li>
+<li>&quot;----&quot;为标题与内容的分界线</li>
+</ul>
 
-</article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><hgroup>
-<h2>主页面样式</h2>
-<h3>----是上下分界线</h3>
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h1>对齐</h1>
 
 </hgroup><article>
 
-<p>nodeppt是基于nodejs写的支持 <strong>Markdown!</strong> 语法的网页PPT</p>
-<p>nodeppt：<a href="https://github.com/ksky521/nodePPT" target="_blank">https://github.com/ksky521/nodePPT</a></p>
+<ul class="flexbox vleft">
+<li>左对齐</li>
+<li>左对齐</li>
+</ul>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article>
-<p>什么？这些功能还不够用？</p>
-<p>极客模式：查看源码的nodeppt.js，相信你会找到牛逼的手机互动（摇一摇换页）功能</p>
-<p>查看项目目录ppts获取更多帮助信息</p>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>使用方法：列表第一条加上 &quot; {:&amp;.动画类型}&quot;</p>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h2>单条动画</h2>
+
+</hgroup><article>
+
+<ul>
+<li>目前支持的单条动画效果包括<ul class="rollIn">
+<li>moveIn</li>
+<li>fadeIn</li>
+<li>bounceIn</li>
+<li>rollIn</li>
+<li>zoomIn</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image:url('./img/bg1.png')"><section class="slide-wrapper"><article>
+<h2>背景图片</h2>
+
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><div class="magic"><div class="magicItem current pagedown"  data-transition="earthquake"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>演示magic标签效果</h2>
+
+</hgroup><article>
+
+<div class="columns2">
+    <img src="./img/girl.jpg" height="450">
+    <img src="./img/girl.jpg" height="450">
+</div>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="earthquake"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h2>演示earthquake转场效果</h2>
+
+</hgroup><article>
+
+<img src="./img/girl.jpg" alt="">
+
+</article>
+</div>
+</article></div></div></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>表格</h2>
+
+</hgroup><article>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>h1</th>
+<th>h2</th>
+<th>h3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c11</td>
+<td>c12</td>
+<td>c13</td>
+<td class="highlight">c14</td>
+</tr>
+<tr>
+<td>c21</td>
+<td>c22</td>
+<td>c23</td>
+<td>c24</td>
+</tr>
+</tbody>
+</table>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>nodePPT快捷键介绍</h1>
+
+</hgroup><article>
+
+<ul>
+<li>输入页码，然后enter</li>
+<li>使用O键，开启纵览模式，方向键翻页，[enter]进入选中页</li>
+<li>按下H键，<em>斜体字</em>会动</li>
+<li>N键显示备注</li>
+<li>P键使用画笔，B/Y/R/G/M键更换颜色 1～4键更换粗细 C键清空画板</li>
+<li>alt+click 点击地方放大，再做一次会缩小(需要zoom.js)</li>
+</ul>
 
 </article></section></slide>
         
@@ -94,7 +206,7 @@ Slide.init({
     slideClass: '.slide',
     buildClass: '.build',
     progressID: 'progress',
-    transition: 'zoomin',
+    transition: 'slide3',
     width: 1100,
     dir: './',
     
