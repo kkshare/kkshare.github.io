@@ -1,6 +1,6 @@
 title: 精简版UML
 speaker: kk
-url: https://tt8x.github.io
+url: https://kkshare.github.io
 transition: slide3
 theme: dark
 
@@ -10,7 +10,7 @@ theme: dark
 
 <small>2016-04-26 演讲者：何通庆</small>
 
-[主页](https://tt8x.github.io)
+[主页](https://kkshare.github.io)
 
 [slide]
 # 主要内容
