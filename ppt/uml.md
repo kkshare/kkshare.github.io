@@ -1,4 +1,4 @@
-title: 精简版UML
+title: UML简明参考
 speaker: kk
 url: https://kkshare.github.io
 transition: slide3
