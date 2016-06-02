@@ -28,3 +28,18 @@ macbook
 mou
 
     cmd-] mou多行代码同时缩进tab
+
+## vmware
+
+vmnet1 & vmnet8 配置文件位于 "/Applications/Vmware Fusion.app/Contents/Library" , 可修改默认地址也，vmnet8 还可以添加映射端口
+
+    cd /Library/Preferences/VMware\ Fusion
+    cat networking
+    cat vmnet1/dhcpd.conf
+    cat vmnet8/dhcpd.conf
+    cat vmnet8/nat.conf
+
+修改后重启VMware Funsion网络
+
+    /Applications/Vmware\ Fusion.app/Contents/Library/vmnet-cli -c  
+    /Applications/Vmware\ Fusion.app/Contents/Library/vmnet-cli -start  
