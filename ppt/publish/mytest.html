@@ -1,0 +1,273 @@
+---
+layout: null
+title : "mytest - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>mytest - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>mytest</h1>
+<p><small>2016-06-06 by 何通庆</small></p>
+<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>这里不包括适合整个公司的测试规范</p>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>目标</h1>
+<ul class="rollIn">
+<li>找到适合本部门（小组）的单元测试方法</li>
+<li>找到适合自己个人的单元测试方法</li>
+<li>提高代码质量</li>
+<li>提高开发效率</li>
+<li>让开发成为一个很有成就的事情</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>单元测试优点</h1>
+<ul class="rollIn">
+<li>提高代码质量、减少BUG</li>
+<li>提升反馈速度，减少重复工作，提高开发效率</li>
+<li>保证你最后的代码修改不会破坏之前代码的功能</li>
+<li>让代码维护更容易</li>
+<li>有助于改进代码质量和设计<br><small>我相信很多易于维护、设计良好的代码都是通过不断的重构才得到的</small></li>
+<li>真的有那么好吗？这些优点值得推敲!</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>缺点可能都被一笔带过了，我们要思考的是为什么实践中大家没有这个做或做得不够？<br>有一种情形：看代码发现某个函数名称影响阅读与理解，于是想修改，但又想想还有很多单元测试要改就算了吧</p>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>单元测试缺点</h1>
+<ul class="rollIn">
+<li>学习成本比较高:各种框架,框架本身也不断升级,框架本身稳定吗？</li>
+<li>增加开发工作量:<ul class="rollIn">
+<li>测试工作量甚至大于开发，因为一个函数多个测试</li>
+<li>由于代码重构，内部函数经常变化，测试用例也经常变化</li>
+<li>代码重构情况是很多的：名称、参数、业务变化、架构变化</li>
+<li>开发代码改一处，测试代码改多处</li>
+</ul>
+</li>
+<li>推广和运用单元测试需要比较大的投入:培训、制度、考核。效率呢？</li>
+<li>多大程度提高代码质量？测试程序本身的质量呢？</li>
+<li>开始<font size=20>头</font>大了</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>适合自己（部门／小组）的测试</h1>
+<ul class="rollIn">
+<li>对公共接口、外部接口测试</li>
+<li>使用RESTful接口(curl)</li>
+<li>simpleTest:对没把握的算法、函数进行简单测试</li>
+<li>熟悉常用工具、脚本(shell/python)</li>
+<li>熟悉debug/remote debug</li>
+<li>利用配置文件(config/hosts)</li>
+<li>采用广度优先策略定位BUG</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>对公共接口、外部接口测试</h1>
+<ul class="rollIn">
+<li>公共或外部接口变化小</li>
+<li>对代码覆盖率高</li>
+<li>开发量少，效率高</li>
+<li>接近最终用户使用场景,更真实反应用户行为</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>使用RESTful接口(curl)</h1>
+<ul class="rollIn">
+<li>支持命令行方式测试</li>
+<li>POST <code>curl -X POST url -d &quot;id=2&amp;name=x&quot;</code></li>
+<li>GET  <code>curl -G url -d &quot;id=2&amp;name=x&quot;</code></li>
+<li>POST JSON <code>curl -H &quot;Content-type: application/json&quot; -X POST url -d &#39;{&quot;id&quot;:&quot;2&quot;}&#39;</code></li>
+<li>curl有windows版本，或者使用MobaXterm/cygwin等</li>
+<li>curl可以在服务器测试，排除防火墙问题</li>
+<li>容易实现自动化测试，各种语言都有httplib实现curl</li>
+<li>自动化测试跟简单的使用脚本:简单不失灵活、容易理解、依赖少</li>
+<li>便于后续性能测试</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>simpleTest</h1>
+<ul>
+<li>没有把握的算法、函数进行简单测试</li>
+<li>比如substr函数、正则表达式匹配等</li>
+<li>简单测试依赖少，容易编译通过</li>
+<li>javascript也可以写单个页面的测试</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>熟悉常用工具与脚本(shell/python)</h1>
+<ul class="rollIn">
+<li>有助于分析日志</li>
+<li>有助于制造测试数据<br>有些测试数据生产比较困难，用一些工具模拟却很方便</li>
+<li>awk/sort/grep/sed/vim/editplus/notepad...</li>
+<li>python:简洁清晰、胶水语言、丰富强大的库...</li>
+<li>tcpdump/wireshark</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>熟悉debug/remote debug</h1>
+<ul class="rollIn">
+<li>对复现困难的BUG</li>
+<li>本地环境不满足要求</li>
+<li>remote debug(netbeans)<br>edit ${TOMCAT_HOME}/bin/catalina.sh<pre><code>set JPDA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n
+set JAVA_OPTS=%JAVA_OPTS% %JPDA_OPTS%
+</code></pre>netbeans-&gt;调试-&gt;连接调试器-&gt;port=8787</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>利用配置文件</h1>
+<ul>
+<li>可以设置开关测试模式</li>
+<li>配置文件可用文本工具查看，容易发现错误</li>
+<li>善用hosts</li>
+<li>改代码风险<ul>
+<li>编辑器bug</li>
+<li>编译环境不一样</li>
+<li>重新上传代码的网络问题</li>
+<li>对其他代码的影响</li>
+<li>版本号问题可能导致传错文件</li>
+<li>过多的版本号增加管理复杂度</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>4A 测试介绍</h1>
+<pre><code>main(){
+    allTest();
+    //test1();
+}
+void allTest(){
+    before();//准备测试数据
+    test1();
+    test2();
+    ...
+    after();//清除测试数据
+}
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>不断改进</h1>
+<ul class="rollIn">
+<li>facebook：让亲身实践者执行工作流程<ul>
+<li>个人制定并执行的工作流程，会针对真实工作的情况进行更多优化调整。
+管理者设计的工作流程，最多能接近实际工作流程，它需要管理、优化或整理。
+这是许多愚蠢、低效的工作流程的来源。</li>
+<li>在人们亲自制定工作流程时，会感到更大的自主权。
+在今后，随着情况不可避免地变化，也就更有权视情况对其调整，而不是任其僵化。
+外部强加的（自上而下的）工作流程更加难以打破，而且往往会被神化，从而产生非常大的组织惯性。</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>thanks</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
