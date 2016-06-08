@@ -5,6 +5,13 @@ tagline: by 何通庆
 ---
 {% include JB/setup %}
     
+<h2>ppt</h2>
+<ul>
+{% assign pages_list = site.pages %}
+{% assign group = 'ppt' %}
+{% include JB/pages_list %}
+</ul>
+
 ## 所有文章
 <ul class="posts">
   {% for post in site.posts %}
@@ -12,8 +19,3 @@ tagline: by 何通庆
   {% endfor %}
 </ul>
 
-<h2>All Pages</h2>
-<ul>
-{% assign pages_list = site.pages %}
-{% include JB/pages_list %}
-</ul>
