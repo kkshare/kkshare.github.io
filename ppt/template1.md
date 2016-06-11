@@ -1,6 +1,6 @@
 title: ppt template 1
 speaker: kk
-url: https://tt8x.github.io
+url: https://kkshare.github.io
 transition: slide3
 theme: dark
 
@@ -10,7 +10,7 @@ theme: dark
 ## 二级标题
 <small>2016-04-26 演讲者：xxx</small>
 
-[主页](https://tt8x.github.io)
+[主页](https://kkshare.github.io)
 
 [note]
 - 这是备注，按键盘“N”显示
