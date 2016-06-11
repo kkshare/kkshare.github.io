@@ -1,0 +1,505 @@
+---
+layout: null
+group : ppt
+title : "Git基本工作原理与常用命令 - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Git基本工作原理与常用命令 - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Git</h1>
+<h2>基本工作原理与常用命令</h2>
+<p><small>2016-06-08 何通庆</small></p>
+<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>版本管理软件历史</h1>
+<ul>
+<li>本地版本管理</li>
+<li>集中式版本管理<ul>
+<li>CVS</li>
+<li>SVN</li>
+</ul>
+</li>
+<li>分布式版本管理</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><div class="magic"><div class="magicItem current pagedown"  data-transition="pulse"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h3>本地版本管理</h3>
+
+</hgroup><article>
+
+<img src="./img/local.version.png" alt="">
+
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition="pulse"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h3>集中式版本管理</h3>
+
+</hgroup><article>
+
+<img src="./img/centralized.version.png" alt="">
+
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown"  data-transition="pulse"><article>
+<div class="magic-wrapper">
+<hgroup>
+<h3>分布式版本管理</h3>
+
+</hgroup><article>
+
+<img src="./img/distributed.version.png" alt="">
+
+</article>
+</div>
+</article></div></div></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>SVN V.S. Git</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Git</th>
+<th>SVN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>断网</td>
+<td>可提交数据</td>
+<td>不可提交数据</td>
+</tr>
+<tr>
+<td>断网</td>
+<td>可查看历史与日志</td>
+<td>不可查看历史与日志</td>
+</tr>
+<tr>
+<td>分支</td>
+<td>简单快速</td>
+<td>创建、合并复杂</td>
+</tr>
+<tr>
+<td>全局版本号</td>
+<td>字符串</td>
+<td>数字(直观)</td>
+</tr>
+<tr>
+<td>内容完整性</td>
+<td>SHA-1</td>
+<td>无</td>
+</tr>
+<tr>
+<td>权限管理</td>
+<td>无</td>
+<td>完整、安全,目录级权限控制</td>
+</tr>
+<tr>
+<td>学习成本</td>
+<td>较高</td>
+<td>简单,成熟的GUI</td>
+</tr>
+</tbody>
+</table>
+<ul class="rollIn">
+<li>结论：Git适合开源与纯代码开发</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>其它版本管理系统保存信息方式(包括svn)</h2>
+<img src="./img/deltas.version.png" alt="">
+<ul>
+<li>可以看作一组基本文件和每个文件随时间逐步累积的差异</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Git保存信息方式</h2>
+<img src="./img/snapshots.version.png" alt="">
+<ul>
+<li>对当时的全部文件制作一个快照并保存这个快照的索引</li>
+<li>没有修改的文件，只保留一个链接指向之前存储的文件</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Git基础</h1>
+<ul>
+<li>近乎所有操作都是本地执行</li>
+<li>保证完整性:数据库信息以文件内容的哈希值来索引(不是文件名)</li>
+<li>三个工作区域的概念：Git仓库、工作目录以及暂存(索引)区域<br><img src="./img/areas.version.png" alt=""></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Git基本工作流程</h1>
+<ul>
+<li>在工作目录中修改文件</li>
+<li>暂存文件，将文件的快照放入暂存区域</li>
+<li>提交更新，将暂存区域的文件快照永久性存储到本地仓库</li>
+<li>仓库同步,分支合并（可选）</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>命令行优点:</p>
+<ul>
+<li>能执行GIT所有命令，GUI不行</li>
+<li>学会命令行再操作GUI容易，反之不成立</li>
+<li>GUI工具各不相同，命令行工具是一样的</li>
+<li>可能没有GUI，但命令行一定会有</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>安装</h1>
+<ul>
+<li>linux: <code>sudo yum install git</code></li>
+<li>Debian: <code>sudo apt-get install git</code></li>
+<li>Mac: 首次运行提示安装</li>
+<li>windows: <a href="http://git-scm.com/download/win" target="_blank">git for windows</a>或<a href="http://windows.github.com/" target="_blank">gihub for windows</a></li>
+<li>详细信息参考<a href="https://git-scm.com/book/zh/v2/起步-安装-Git" target="_blank">这里</a></li>
+<li>本文主要基于命令行</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>创建仓库</h1>
+<ul>
+<li>在现有目录中初始化仓库<pre><code class="bash">mkdir myrepo;cd myrepo
+git init
+</code></pre>
+</li>
+<li>克隆现有的仓库<pre><code class="bash">git clone https://ebentest@github.com/ebentest/ppt.git myppt
+git clone git@github.com:ebentest/ppt.git myppt    #SSH
+</code></pre>
+</li>
+<li>现在我们有两个仓库<ul>
+<li>myrepo: 纯本地仓库</li>
+<li>myppt: 与远程仓库关联(跟踪)的本地仓库</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>password:123qwert</p>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>更新文件</h1>
+<pre><code class="bash">cd myppt;echo &quot;hello&quot;&gt;&gt;README
+git status                   #检查文件状态
+git add README               #跟踪新文件
+git commit -m &quot;first commit&quot; #提交更新
+git push origin master       #推送到远程仓库
+</code></pre>
+<ul>
+<li>文件状态变化周期<br><img src="./img/lifecycle.version.png" alt=""></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>文件状态变化周期</h1>
+<img src="./img/lifecycle.version.png" alt="">
+<ul>
+<li>git add<ul>
+<li>开始跟踪新文件，</li>
+<li>把已跟踪的文件放到暂存区，</li>
+<li>合并时把有冲突的文件标记为已解决状态等</li>
+</ul>
+</li>
+<li>跳过暂存区域直接提交:<code>git commit -a -m &quot;x&quot;</code></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>远程仓库</h1>
+<ul class="rollIn">
+<li>查看远程仓库<pre><code class="bash">$ git remote
+origin         #远程仓库名字
+$ git remote -v
+origin  https://ebentest@github.com/ebentest/ppt.git (fetch)
+origin  https://ebentest@github.com/ebentest/ppt.git (push)
+</code></pre>
+<ul>
+<li>origin是克隆远程仓库时的默认名字</li>
+<li>本地仓库没有名字，但有默认分支master</li>
+</ul>
+</li>
+<li>添加远程仓库: git remote add <shortname> <url><pre><code class="bash">git remote add ppt https://ebentest@github.com/ebentest/ppt.git
+git fetch ppt           #使用ppt代替整个URL
+git checkout ppt/master #切换到远程仓库ppt的master分支
+</code></pre>
+<ul>
+<li>只有fetch是联网操作，其它是本地操作</li>
+<li>注意区分仓库名字与分支名字</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>与其它版本控制系统的区别</p>
+<ul>
+<li>不是源代码目录的拷贝</li>
+<li>高效的&quot;必杀技特性&quot;</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分支原理</h1>
+<img src="./img/commit-and-tree.version.png" alt="">
+<ul>
+<li>Git仓库中有五个对象(假设仓库中有三个文件)：<ul>
+<li>三个blob对象(保存着文件快照)</li>
+<li>一个树对象(记录着目录结构和blob对象索引)</li>
+<li>一个提交对象(包含着指向前述树对象的指针和所有提交信息)</li>
+</ul>
+</li>
+<li>创建分支即新建一个指向在当前提交对象(HEAD)上的指针</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分支管理</h1>
+<pre><code class="bash">git branch [branch-name]    创建分支
+git checkout [branch-name]  切换当前分支（HEAD所指向的分支）
+git checkout -b br1  相当于git branch br1;git checkout br1
+git branch -d [branch-name] 删除分支
+git merge br1 将当前分支(HEAD)与br1分支合并
+git push ppt  将当前分支(HEAD)推送到远程仓库ppt的master分支
+</code></pre>
+<ul>
+<li>分支合并会产生一个新的提交</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>远程分支</h1>
+<img src="./img/remote-branches.version.png" alt="">
+<ul>
+<li>origin/master 表示远程仓库origin的master分支</li>
+<li>master 表示本地master分支</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>其它常用命令1</h1>
+<pre><code class="bash">git diff 显示当前文件与暂存文件之间的差异
+git diff --staged 显示暂存文件与仓库之间的差异
+git difftool      插件版本
+git difftool --tool-help 查看支持的diff图形化插件
+git rm                   删除
+git rm -f                强制删除
+git mv file-from file-to 移动/重命名文件
+git log -p -2            显示最近两次提交的内容差异
+git log --since=2.weeks  列出最近两周内的提交
+git log -Sfoobar         列出修改了字符串foobar的提交
+git log -- &lt;filename or dir&gt;
+</code></pre>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>注意区分remote-name与branch-name:</p>
+<ul>
+<li>remote-name:远程仓库名字</li>
+<li>branch-name:分支名字，本地仓库也可以有多个分支</li>
+<li>一个仓库可以多个分支</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>其它常用命令2</h1>
+<pre><code class="bash">git commit --amend    将前面一次提交与这次提交合并，结果只有一次提交
+git reset HEAD &lt;file&gt; 取消暂存文件，暂存文件变成modified
+git checkout -- file  丢弃对工作目录的修改，从本地取文件，不是从远程取文件;
+                      这是危险命令，因对此文件的修改都会消失
+git fetch [remote-name] [branch-name]
+git push [remote-name] [branch-name]
+</code></pre>
+<ul>
+<li>pull=fetch+merge</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>变量配置</h1>
+<ul>
+<li>每台计算机上只需要配置一次，程序升级时会保留配置信息</li>
+<li>/etc/gitconfig 系统级通用配置，适合每个用户(--system)</li>
+<li>~/.gitconfig 或 ~/.config/git/config 全局配置，<br>适合当前用户(--global)</li>
+<li>.git/config 针对当前仓库的配置(不加选项)<pre><code class="bash">git config --global user.name ”ebentest”
+git config --global user.email ebentest@qq.com
+git config --global core.editor vim
+git config --list 列出所有配置,检查配置
+git config core.quotepath false 文件名中文显示
+</code></pre>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>别名</h1>
+<pre><code class="bash">git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.unstage &#39;reset HEAD --&#39; #从缓存区移除
+git config --global alias.last &#39;log -1 HEAD&#39;      #查看最近一次日志
+# 日志格式：sha-1 - author, xx time ago : comment
+git config --global alias.log1 &#39;log --pretty=format:&quot;%h - %an, %ar : %s&quot;&#39;
+# 查看分支历史,ascii吗图形显示
+git config --global alias.log2 &#39;log --oneline --decorate --graph --all&#39;
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>其它</h1>
+<ul>
+<li>.gitignore <a href="https://github.com/github/gitignore" target="_blank">文件列表</a></li>
+<li>获取帮助的三种方法:<pre><code class="bash">$ git help &lt;verb&gt;
+$ git &lt;verb&gt; --help
+$ man git-&lt;verb&gt;
+</code></pre>
+</li>
+<li>参考手册: <a href="https://git-scm.com/book/zh/v2/" target="_blank">https://git-scm.com/book/zh/v2/</a></li>
+<li>从svn导出仓库到git<pre><code class="bash">git svn clone file:///opt/svn.repo.loc --no-metadata --trunk=trunk draft.repo
+# no-metadata:阻止git导出svn包含的附加信息，这样提交到Git的记录就会显得很“干净”
+# trunk:主分支
+# draft.repo:创建的git项目名称
+</code></pre>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<ul>
+<li>常用命令其实很少，我们可以有信心把它掌握的</li>
+<li>有些命令跟svn很像</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>常用命令一览</h1>
+<ul>
+<li><code>git init</code>      创建仓库</li>
+<li><code>git clone url</code> 克隆仓库</li>
+<li><code>git add file</code>  添加文件</li>
+<li><code>git commit -m &#39;version 1&#39;</code> 提交</li>
+<li><code>git remote add origin url</code> 跟踪远程分支</li>
+<li><code>git push origin master</code>    推送</li>
+<li><code>git pull</code>  更新本地仓库至最新</li>
+<li><code>git diff</code>  显示文件差异</li>
+<li><code>git log</code>   查看提交日志</li>
+<li><code>git status</code>检查状态</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>thanks</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
