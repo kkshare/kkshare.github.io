@@ -278,5 +278,4 @@ git svn clone file:///opt/svn.repo.loc --no-metadata --trunk=trunk draft.repo
 - 有些命令跟svn很像
 [/note]
 
-[slide]
-# thanks
+ * end of ppt,thanks! {:&.rollIn}

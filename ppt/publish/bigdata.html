@@ -1,0 +1,249 @@
+---
+layout: null
+group : ppt
+title : "互联网+时代的数据处理技巧 - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>互联网+时代的数据处理技巧 - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>互联网+时代的数据处理技巧</h1>
+<p><small>2016-06-15 何通庆</small></p>
+<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>数据存储集群发展</h1>
+<ul>
+<li>单机</li>
+<li>主从集群:mysql master/slave模式</li>
+<li>多主从集群:代理+多主从集群</li>
+<li>分布式存储:BigTable,HBase,Cassandra<ul>
+<li>zookeeper</li>
+<li>cap,paxos</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>多主从集群</h1>
+<ul>
+<li>数据源：redis、mysql、mongodb</li>
+<li>架构简单</li>
+<li>稳定性较好(目前)</li>
+<li>业界应用较多(目前)</li>
+<li>需要解决的问题<ul>
+<li>数据路由</li>
+<li>实例迁移</li>
+<li>实例动态变更</li>
+<li>扩容(一致性hash)</li>
+<li>配置</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<ul>
+<li>TwemProxy<ul>
+<li>最早/最有名的Proxy解决方案</li>
+<li>Twitter内部已经弃用</li>
+<li>静态拓扑，不能支持动态扩容，缩容</li>
+<li>更改配置需全服重启</li>
+</ul>
+</li>
+<li>Codis<ul>
+<li>全兼容twemproxy,充分利用多核，性能高</li>
+<li>proxy无状态</li>
+<li>运维工具齐全</li>
+<li>不停机resharding，动态扩容，缩容</li>
+<li>强依赖zookeeper</li>
+<li>需要修改版Redis支持</li>
+</ul>
+</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>多主从集群代理选型考虑</h1>
+<ul>
+<li>服务器proxy/客户端proxy/P2P<br><img src="./img/db.proxy.jpg" alt=""></li>
+<li>是否可定制、二次开发</li>
+<li>监控运维是否友好</li>
+<li>自研成本</li>
+<li>Redis: codis、twemproxy ...</li>
+<li>Mysql: cobar、TDDL、atlas ...</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分布式KV数据库</h1>
+<ul>
+<li>redis,couchBase,mongodb,cassandra ...</li>
+<li>redis优点<ul>
+<li>纯内存，性能高，速度快</li>
+<li>协议简单，客户端丰富</li>
+<li>String,list,hash,set,zset等数据结构</li>
+<li>持久化支持，RDB，AOF</li>
+<li>Replication支持</li>
+<li>大量公司使用，市场选择</li>
+</ul>
+</li>
+<li>redis缺点<ul>
+<li>数据量太大，内存不够</li>
+<li>无法区分冷热数据，内存严重浪费</li>
+<li>RDB Block整个服务</li>
+<li>写操作太频繁，AOF刷盘太多，容易Rewrite</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分布式KV数据库</h1>
+<ul>
+<li>Redis Cluster<ul>
+<li>官方出品，但最近才出了一个Stable版</li>
+<li>业界几乎没有成功案例，没有最佳实践指导</li>
+<li>系统复杂度高，运维难度高，升级困难</li>
+<li>要修改客户端，很多人接受不了</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分布式KV数据库</h1>
+<ul>
+<li>QDB 优点<ul>
+<li>redis子集，支持大部分常用redis命令</li>
+<li>string,hash,list,set,zset数据结构支持</li>
+<li>多存储引擎支持，rocksdb，leveldb等</li>
+<li>超越内存限制，热点数据内存，冷数据硬盘</li>
+<li>qdb,redis相互同步，支持psync断点续传</li>
+<li>go多核友好，并发读支持，性能强悍</li>
+</ul>
+</li>
+<li>QDB 缺点<ul>
+<li>数据量太大，硬盘撑不住了</li>
+<li>单点，性能瓶颈</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Docker</h1>
+<ul>
+<li>“这个容器管理引擎大大降低了容器技术的使用门槛，轻量级，可移植，虚拟化，语言无关，写了程序
+扔上去做成镜像可以随处部 署和运行，开发、测试和生产环境彻底统一了，还能进行资源管控和虚拟
+化。”</li>
+<li><a href="http://www.oschina.net/news/57838/docker-dotcloud" target="_blank">http://www.oschina.net/news/57838/docker-dotcloud</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>环信</h1>
+<ul>
+<li><a href="http://www.easemob.com/" target="_blank">http://www.easemob.com/</a></li>
+<li>提供即时通讯云服务，开源</li>
+<li>可用于移动应用，web应用</li>
+<li>简单集成(30万用户以内免费)</li>
+<li><p>技术爱好者论坛 <a href="http://www.imgeek.org" target="_blank">http://www.imgeek.org</a></p>
+<ul class="rollIn">
+<li>end of ppt,thanks!</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>

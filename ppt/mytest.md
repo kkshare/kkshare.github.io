@@ -155,5 +155,4 @@ void allTest(){
 - 提高开发效率
 - 让开发成为一个很有成就的事情
 
-[slide]
-# thanks
+ * end of ppt,thanks! {:&.rollIn}

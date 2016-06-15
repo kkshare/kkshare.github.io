@@ -1,0 +1,201 @@
+---
+layout: null
+group : ppt
+title : "分布式系统架构经验总结 - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>分布式系统架构经验总结 - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分布式系统架构经验总结</h1>
+<p><small>2016-06-15 何通庆</small></p>
+<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>利用开源项目</h1>
+<ul>
+<li>资源: codeplex, google code, sourceforge,<br>github.com www.open-open.com</li>
+<li>直接使用:tomcat,mysql,redis</li>
+<li>间接使用:使用部分组件、代码或仅参考设计思路</li>
+<li>改造使用:改配置，增加代理，改源码(如何改造？)<ul>
+<li>使用工具是为了解决问题，带着问题不偏离方向</li>
+<li>带着问题能够激发好奇与兴趣，使责任与兴趣统一</li>
+<li>查看源码：源码之下藏不住真相</li>
+<li>分解问题：小问题容易完成，有成就感，持续动力</li>
+<li>优缺点同时关注，同类产品对比 ehcache/memcache/redis</li>
+<li>突破点：运行起来</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>何时不用开源项目</h1>
+<ul>
+<li>反思为何使用开源<ul>
+<li>为了赶时髦？为了技术而技术？</li>
+<li>为了技术还是解决问题？</li>
+</ul>
+</li>
+<li>优缺点同时关注，对比<ul>
+<li>没有项目会否定自己</li>
+</ul>
+</li>
+<li>开源项目通常会考虑通用性<ul>
+<li>增加性能损耗</li>
+<li>增加学习成本</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>为何不用spring</h1>
+<ul>
+<li>AOP(分层架构)<ul>
+<li>为了降低耦合增加重用，可是重用反而会增加耦合。</li>
+<li>需要重新考虑分层架构真的能够降低耦合？</li>
+<li>解耦应该大于重用</li>
+</ul>
+</li>
+<li>IoC(控制反转)<ul>
+<li>通过配置文件实现，很多配置文件我们从来不改，改也很麻烦。</li>
+<li>增加性能损耗、学习成本与文档文本。</li>
+<li>生成一个对象的步骤变复杂(别扭和不直观)</li>
+<li>降低人们了解全部源代码能力 (限制了开发，麻烦了管理)</li>
+<li>我们需要这么灵活吗？</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>为何不用spring</h1>
+<ul>
+<li>提倡小而紧，高聚合，低耦合系统<ul>
+<li>分层是有必要的，未必需要用AOP/IoC实现</li>
+<li>分层通过用不同包(类)实现，尽量不增加额外配置文件</li>
+<li>对内支持灵活重构，对外保持不变、少变(RESTful API)</li>
+<li>黑盒测试，模拟场景+性能测试</li>
+<li>更适合XP开发，快速迭代</li>
+</ul>
+</li>
+<li>架构三原则：简单、简单、再简单<ul>
+<li>&quot;互联网+&quot;特点未必是大，但一定要快</li>
+<li>简单才能快</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>其它经验</h1>
+<ul>
+<li>Done is better than perfect --Facebook</li>
+<li>始终关注性能，集中解决性能瓶颈(广度优先)</li>
+<li>扩展性：预测一到两步（别太多）</li>
+<li>热爱</li>
+<li><em>边</em>工作<em>边</em>总结，不只是工作后总结，后者难度大<ul>
+<li>记笔记(evernote随身携带)</li>
+<li>blog</li>
+<li>ppt:更能概括出精华</li>
+</ul>
+</li>
+<li>开发工具代替人力低效劳动</li>
+<li><p>适合自己(公司)的才是最好的</p>
+<ul class="rollIn">
+<li>end of ppt,thanks!</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>

@@ -8,7 +8,7 @@ theme: dark
 
 # 演讲主题
 ## 二级标题
-<small>2016-04-26 演讲者：xxx</small>
+<small>2016-04-26 何通庆</small>
 
 [主页](https://kkshare.github.io)
 
@@ -86,3 +86,5 @@ c21 |c22 |c23 |c24
 - N键显示备注
 - P键使用画笔，B/Y/R/G/M键更换颜色 1～4键更换粗细 C键清空画板
 - alt+click 点击地方放大，再做一次会缩小(需要zoom.js)
+
+ * end of ppt,thanks! {:&.rollIn}
