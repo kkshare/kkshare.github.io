@@ -31,6 +31,30 @@ title : "分布式系统架构经验总结 - By kk"
 <p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
 
 </article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>facebook：让亲身实践者执行工作流程</p>
+<ul>
+<li>个人制定并执行的工作流程，会针对真实工作的情况进行更多优化调整。
+管理者设计的工作流程，最多能接近实际工作流程，它需要管理、优化或整理。
+这是许多愚蠢、低效的工作流程的来源。</li>
+<li>在人们亲自制定工作流程时，会感到更大的自主权。
+在今后，随着情况不可避免地变化，也就更有权视情况对其调整，而不是任其僵化。
+外部强加的（自上而下的）工作流程更加难以打破，而且往往会被神化，从而产生非常大的组织惯性。</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Facebook的五条管理技术团队的经验</h1>
+<ul>
+<li>招聘很紧急，而且要找牛人</li>
+<li>流程由实践者确立</li>
+<li>内部晋升，不找空降的管理人员</li>
+<li>开发工具代替人力低效劳动</li>
+<li>技术领导，不要外行指挥内行。</li>
+</ul>
+
+</article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>利用开源项目</h1>
 <ul>
@@ -89,7 +113,12 @@ title : "分布式系统架构经验总结 - By kk"
 </ul>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>UNIX哲学:简单简单简单</p>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>为何不用spring</h1>
 <ul>
 <li>提倡小而紧，高聚合，低耦合系统<ul>
@@ -103,6 +132,53 @@ title : "分布式系统架构经验总结 - By kk"
 <li>架构三原则：简单、简单、再简单<ul>
 <li>&quot;互联网+&quot;特点未必是大，但一定要快</li>
 <li>简单才能快</li>
+<li>重要的是数据结构而不是复杂的算法</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>系统复杂可能原因(工作量评估参考)</h1>
+<ul>
+<li>前期：架构选型，数据定义，接口定义，开发测试环境准备</li>
+<li>日志</li>
+<li>线程并发</li>
+<li>连接池</li>
+<li>安全</li>
+<li>缓存(用户，文件，会话)</li>
+<li>异常处理:这个常常占用很多工作，常被忽略</li>
+<li>单元测试调试</li>
+<li>需求变更：数据关联增加复杂性</li>
+<li>后期：部署，配置，脚本工具</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>分布式系统开发总结</h1>
+<ul>
+<li>可靠性可扩展性最重要，其次才是性能</li>
+<li>随时优雅重启，不是不停机</li>
+<li>IPC使用TCP，可用命令<code>netstat -tn</code>检查队列状态</li>
+<li>考虑zookeeper实现自己的nameservice<ul>
+<li>DNS不适合快速failover(超时而不是轮询)</li>
+</ul>
+</li>
+<li>使用IDGenerater:减少生成ID时的IO等</li>
+<li>避免阻塞IO+心跳检测</li>
+<li>消息模型与协议格式尽早确定：thrift,PB,Avro,MessagePack - 利于系统升级</li>
+<li>监控：内置http服务器+外部监控,REST-SOAP</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>关门的能力: 知道不做什么也很重要</h1>
+<ul>
+<li>太多重点相当于没有重点，分心工作做不好任何一项工作</li>
+<li>避免过度架构<ul>
+<li>maven一些插件用shell实现(比如打包、部署)</li>
+<li>单元测试用集成测试代替, 参考<a href="https://kkshare.github.io/ppt/publish/mytest" target="_blank">mytest</a></li>
+<li>自己写的代码文件少，依赖少，升级容易，包括本身的升级与依赖组件的升级</li>
 </ul>
 </li>
 </ul>
@@ -116,18 +192,55 @@ title : "分布式系统架构经验总结 - By kk"
 <li>扩展性：预测一到两步（别太多）</li>
 <li>热爱</li>
 <li><em>边</em>工作<em>边</em>总结，不只是工作后总结，后者难度大<ul>
-<li>记笔记(evernote随身携带)</li>
-<li>blog</li>
-<li>ppt:更能概括出精华</li>
+<li>记笔记(evernote随身携带)或blog</li>
+<li>ppt:更能概括出精华，了解更深入，变成真正自己的知识</li>
 </ul>
 </li>
 <li>开发工具代替人力低效劳动</li>
-<li><p>适合自己(公司)的才是最好的</p>
-<ul class="rollIn">
-<li>end of ppt,thanks!</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>工作体会</h1>
+<ul>
+<li>基础技能除了算法还有这些能力也很重要：<ul>
+<li>专注能力</li>
+<li>学习能力</li>
+<li>使用工具或IDE的能力</li>
+<li>查找知识的能力，建立知识库索引的能力(blog,evernote)</li>
+</ul>
+</li>
+<li>创新很重要，那么什么是创新，如何才能创新，创造创新的条件：<ul>
+<li>工具或IDE掌握熟练了，工作效率高了，业余时间多了</li>
+<li>同事关系融洽了</li>
 </ul>
 </li>
 </ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>技术管理总结</h1>
+<ul>
+<li>执行者制定流程，利于持续改进（唯变不变）</li>
+<li>让流程随处可见，随时参考和改进<ul>
+<li>项目中README，INSTALL</li>
+<li>web方式发布，而不是mail/ftp doc/docx/ppt/pptx/...</li>
+</ul>
+</li>
+<li>优先开发工具</li>
+<li>亲自参与开发才能真正了解和预计进度</li>
+<li>项目计划细化，单个任务不要超过一周</li>
+<li>UNIX哲学：简单简单简单<ul>
+<li>重要的是数据结构而不是算法</li>
+<li>设计的系统必须能让<em>一个人</em>理解</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>适合自己(公司)的才是最好的</h1>
+<p>Thanks!</p>
 
 </article></section></slide>
         

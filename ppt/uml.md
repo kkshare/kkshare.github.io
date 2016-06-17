@@ -8,7 +8,7 @@ theme: dark
 
 # 精简版UML
 
-<small>2016-04-26 演讲者：何通庆</small>
+<small>2016-04-26 何通庆</small>
 
 [主页](https://kkshare.github.io)
 

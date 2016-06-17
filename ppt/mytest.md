@@ -8,7 +8,7 @@ theme: dark
 
 # mytest
 
-<small>2016-06-06 by 何通庆</small>
+<small>2016-06-06 何通庆</small>
 
 [主页](https://kkshare.github.io)
 
