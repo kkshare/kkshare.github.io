@@ -9,6 +9,8 @@ theme: dark
 # hadoop与hbase经验总结
 <small>2010 何通庆</small>
 
+[主页](https://kkshare.github.io)
+
 [slide]
 # hadoop v0.20.0
 [slide]

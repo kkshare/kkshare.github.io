@@ -1,4 +1,4 @@
-title: 得意之作
+title: 项目经验总结(myproud)
 speaker: kk
 url: https://kkshare.github.io
 transition: slide3
@@ -6,8 +6,7 @@ theme: dark
 
 [slide]
 
-# 得意之作
-## 我做过的项目总结
+# 项目经验总结
 <small>2016-06-15 何通庆</small>
 
 [主页](https://kkshare.github.io)
