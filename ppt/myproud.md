@@ -273,7 +273,7 @@ int[] statusOfMovie = [-1,1,2,2,3,1,2,2,4,1,2,2,3,1,2,2,5,1,2,2,3,1,2,2,5,1,2,2,
 int getStatusOfMovie(int[] statusOfFiles)
 {		
 	index = 0;
-	for(int i=0; i<(statusOfFiles.length; i++)
+	for(int i=0; i<statusOfFiles.length; i++)
 	{
 		index = index | (1 << (statusOfFiles[i]-1));
 	}
@@ -285,6 +285,110 @@ int getStatusOfMovie(int[] statusOfFiles)
  * 计算index = 0010|0100|0100 = 0110，即十进制的6
  * 计算最终状态: statusOfMovie[6] = 2 (download)
 - 算法优点:代码量少，便于维护，效率高
+
+[slide]
+# 域名调度算法
+<small>2011-01-26 siteware(使用HBase)</small>
+
+[slide]
+# 项目背景
+- 需要为项目提供从IP到域名的反向解析功能
+ * 先对域名(数百万)进行DNS正向查询
+ * 单台服务器压力大，时间常，需要多台Local DNS查询服务器
+ * 并行查询
+- 需要一个好的域名下发分配算法，至少满足：
+ * 尽可能实时更新域名
+ * 排除无效的域名
+ * 根据域名热点调整更新策略
+
+[slide]
+# 算法描述
+- 为域名添加属性
+ * dispatch_ts记录最近下发时间
+ * ttl记录下发间隔
+- 任务开始，创建下发列表，读取域名列表
+- 如果 (now - dispatch_ts) > ttl 则加入下发列表
+- 更新dispatch_ts成当前时间
+- 每批次下发1000个域名
+- ttl是不固定的，需要根据已有IP数量进行调整
+ * 0个IP，则说明未查询过，设置ttl为0，表示立即查询
+ * 1个IP，可能是小型网站，设置ttl为3天
+ * 大于1个IP，可能是大型网站，设置超时时间为1天
+
+[slide]
+# 算法流程图
+----
+![](/img/domain.dispatch.jpg)
+
+[slide]
+# bengine
+## 短信增值业务处理引擎
+<small>2006</small>
+
+[slide]
+# 项目背景
+- 四川移动项目
+- 实时处理短信增值业务
+- 当时最大处理性能200条/s，要求提高到500条/s
+- 最终性能达到了4000条/s
+
+[slide]
+# 线程设计
+- 多线程+reactor，每个线程一个reactor
+- reactor: non-blocking(记得处理EMFILE)
+- 线程数固定，避免频繁创建与销毁，也方便线程间调配负载
+- 对实时性有要求的connection单独用一个线程；
+- 数据量大的connection可以独占一个线程；
+- 其他次要的辅助性connections可以共享一个线程
+- 纯计算线程不用reactor(浪费)，`blocking_queue<T>`实现线程池
+
+[slide]
+# 并发设计
+- 去掉不必要的锁,对象修改操作挪到同一个线程
+- 使用高级并发编程构件TaskQueue
+- 判断线程死活的状态变量(volatile+SIGALRM + xx_cond_timedwait())
+- 丢弃信号量
+ * 使用mutex:pthreads,   
+   mutex采用futex实现，不必每次陷入系统调用
+ * Windows的CRITICAL_SECTION 也是类似
+ * semaphore一般是系统调用
+
+[slide]
+# 其它设计
+- 控制热点路径的加锁粒度与加锁范围
+ * 共享的数据结构里移除元素包括两步：remove+delete，  
+   delete(销毁)可以放到锁外面
+ * log-先判断日志级别后加锁
+- 不足：使用共享内存，移植性不好
+
+[slide]
+# 后台支撑系统优化
+## 监控、统计、配置下发
+<small>2008 p2sp/gms/gvss</small>
+
+[slide]
+# 项目背景
+- CDN之视频直播系统的支撑子系统
+- 参与十七大、嫦娥奔月、温总理网友见面、国庆阅兵、春晚视频直播
+- 温总理网友见面
+ * 2009.2.28 流量：标准200G + p2p放大100G  
+   300万人次 并发15w
+ * 2010.2.27 流量：标准35G + p2p放大35G  
+   并发178,000人
+- 零差错控制
+
+[slide]
+# 经验总结
+- 将原来脚本上传的数据改成tcp实时传输
+ * 脚本实时性较差，纠错能力较差
+ * 新协议对每个消息都有应答，保证消息可靠性
+- 数据收集与数据入库分开
+ * 降低耦合，便于扩展
+ * 多进程方式，提高系统吞吐率
+- 数据统计之后再入库
+ * 减少数据库存储、查询等压力
+ * 提高入库效率
+ * 原始日志使用率较低，保存在文件系统已经满足要求
 
 [slide]
 # Thanks
