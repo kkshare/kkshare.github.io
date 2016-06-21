@@ -1,0 +1,301 @@
+---
+layout: null
+group : ppt
+title : "blog之路：github+jekyll+nodeppt - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>blog之路：github+jekyll+nodeppt - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>blog之路：github+jekyll+nodeppt</h1>
+<p><small>2016-06-21 何通庆</small></p>
+<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>事情可以指一篇文章、一个项目、人生的一个规划</p>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>为何要写博客</h1>
+<ul class="rollIn">
+<li>重新认识自己</li>
+<li>提高思维逻辑与表达能力</li>
+<li>让事情容易开始，开始了也很难停下来(万事开头难？)<ul>
+<li>让你有大段不被打扰的时间思考，想事情想得更清楚</li>
+<li>锻炼总结归纳能力，提纲挈领能力</li>
+<li>提纲与框架是很好的开始，大脑喜欢(让事情变得简单)</li>
+<li>记录下来，大脑喜欢(大脑认为已经完成，不会有负担)</li>
+<li>因为有记录，中断了也没有关系，可以随时、随地继续</li>
+<li>每一个小步都是向前(方向太重要了)</li>
+</ul>
+</li>
+<li>事情的开始变成:给项目起一个名字，新建一个文档</li>
+<li>博客不是唯一方式，请找到适合自己的</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>本博客特点</h1>
+<ul class="rollIn">
+<li>git+github+jekyll<ul>
+<li>git版本管理</li>
+<li>github免费托管</li>
+<li>jekyll自动生成博客，基于文本的markdown语法</li>
+<li>也可以自建服务器</li>
+</ul>
+</li>
+<li>ppt<ul>
+<li>更要注重逻辑与严谨</li>
+<li>提纲挈领功能更强，变成真正自己的知识</li>
+<li>注重<em>美</em>与<em>简单</em>(<em>美</em>是态度、细节)</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>jekyll简介</h1>
+<ul>
+<li>简单的免费的Blog生成工具</li>
+<li>只生成静态页面，无需数据库支持</li>
+<li>可以免费部署在Github上，而且可以绑定自己的域名</li>
+<li>结合第三方服务支持评论</li>
+<li>markdown语法</li>
+<li>文件介绍<ul>
+<li>_config.yml:配置文件</li>
+<li>_includes:存放可以重复利用的文件</li>
+<li>_layouts:存放的是模板文件</li>
+<li>_posts:文章内容(yyyy-mm-dd-title.MARKUP格式文件名)</li>
+<li>_site:最终生成文件</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>github:账号申请</h1>
+<ul>
+<li>到<a href="https://github.com" target="_blank">github</a>申请账号，以myblog为例</li>
+<li>创建仓库myblog.github.io<ul>
+<li>仓库名字必须是<username>.github.io，否则必须创建gh-pages分支，<br>这样才能通过 <a href="http://myblog.github.io" target="_blank">http://myblog.github.io</a> 访问博客。<br>可以进入仓库-&gt;settings，修改仓库名字</li>
+</ul>
+</li>
+<li>克隆远程仓库<pre><code class="bash">git clone https://github.com/myblog/myblog.github.io.git myblog.repo
+</code></pre>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>jekyll:安装</h1>
+<ul>
+<li>安装<pre><code class="bash">gem install jekyll
+# 如果出现 Errno::ECONNRESET: Connection reset by peer - SSL_connect
+# 是因为GFW原因，用下面方法解决：
+gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l # 请确保只有 ruby.taobao.org
+</code></pre>
+</li>
+<li>克隆jekyll-bootstrap<pre><code class="bash">git clone https://github.com/plusjade/jekyll-bootstrap.git jekyll-bootstrap
+cd jekyll-bootstrap;rm -rf .git;cd -
+cp -rf jekyll-bootstrap myblog.io
+cd myblog.io
+jekyll serve #启动服务，使可以本地预览
+</code></pre>
+</li>
+<li>测试: <a href="http://127.0.0.1:4000/" target="_blank">http://127.0.0.1:4000/</a> 查看示例页面</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>jekyll:常见问题与文章模版</h1>
+<ul>
+<li>github 页面显示不全问题<br>safari-&gt;开发-&gt;显示错误控制台，查看哪些域名不能解析，<br>然后从<a href="http://ipaddress.com" target="_blank">这里</a>查找对应域名，写入/etc/hosts<pre><code class="bash">199.27.74.133 assets-cdn.gihub.com
+172.217.16.170 ajax.googleapis.com
+</code></pre>
+</li>
+<li>文章模版</li>
+</ul>
+<pre><code class="bash">---
+layout: post
+title: &quot;java&quot;
+other-name: other-value
+---
+&lt;content of markdown&gt;
+</code></pre>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>修改后的Front Matter:</p>
+<pre><code>---
+layout: post
+title: &quot;java&quot;
+category: [tech,digest,java]
+date: 发布日期(对文件名中日期进行重写)
+tags: [java,sample code]
+---
+</code></pre>
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>jekyll:生成文章模版</h1>
+<ul>
+<li>生成post(支持comment,date,category,tags)<pre><code class="bash">rake post title=&quot;Hello World&quot;
+</code></pre>
+</li>
+<li>生成page(不支持comment,date,category,tags)<pre><code class="bash">rake page name=&quot;about.md&quot;
+rake page name=&quot;pages/about.md&quot; # 可以指定目录
+</code></pre>
+</li>
+<li>我的常用命令<pre><code class="bash">rake post category=&#39;tech&#39; title=xx  #技术文章
+rake post category=&#39;diary&#39; title=xx #随笔
+rake post category=&#39;memo&#39; title=xx  #备忘录
+rake post category=&#39;[tech,memo]&#39; tags=&#39;[a,b]&#39; title=xx #备忘录
+</code></pre>
+</li>
+<li>rake调用的函数在Rakefile中定义，可以自定义命令，比如我对post文件名固定格式很有意见，所以
+我修改了<code>rake post</code>的行为</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>jekyll-bootstrap源码备忘录</h1>
+<ul>
+<li>配置<pre><code class="bash">_include/JB/setup 初始化BASE_PATH/HOME_PATH/ASSERT_PATH变量
+_layout/ 配置themes风格，真正的css在_include/themes/THEME-NAME/ 定义
+_include/themes/THEME-NAME/default 定义topbar/footer
+_config.yml: ASSET_PATH 与图片、js路径相关
+</code></pre>
+</li>
+<li>显示某个group中的页面(如navigation, 去掉%与{}之间空格)<pre><code class="bash">{ % assign pages_list = site.pages % }
+{ % assign group = &#39;navigation&#39; % }
+{ % include JB/pages_list % }
+</code></pre>
+</li>
+<li>安装主题与切换主题<pre><code class="bash"># https://github.com/jekllbootstrap 下面有几个主题
+rake theme:install git=&quot;https://github.com/jekyllbootstrap/theme-the-program.git&quot;
+rake theme:install git=&quot;https://github.com/jekyllbootstrap/theme-twitter.git&quot;
+rake theme:switch name=&quot;the-program&quot; #bootstrap-3 the-program twitter
+# 另外需修改 _include/JB/setup 中 assets/themes/THEME-NAME
+</code></pre>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>nodeppt</h1>
+<ul>
+<li>支持markdown语法</li>
+<li>jekyll不能将nodeppt语法，对源码做以下修改使其识别<ul>
+<li>添加Front Matter</li>
+<li>生成静态页面扩展名从htm改成html</li>
+<li>具体参考<a href="https://kkshare.github.io/memo/tech/2016-04-24-nodeppt" target="_blank">nodeppt</a></li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>参考资料</h1>
+<ul>
+<li>本人<a href="https://github.com/kkshare/kkshare.github.io" target="_blank">blog</a></li>
+<li>Jekyll文档:<a href="http://jekyllrb.com" target="_blank">http://jekyllrb.com</a></li>
+<li>Jekyll创始人的<a href="https://github.com/mojombo/tpw" target="_blank">示例库</a></li>
+<li>其他用Jekyll搭建的<a href="https://github.com/jekyll/jekyll/wiki/Sites" target="_blank">blog</a>  <ul class="rollIn">
+<li>end of ppt,thanks!</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
