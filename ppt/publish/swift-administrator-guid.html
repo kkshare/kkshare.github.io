@@ -1,0 +1,144 @@
+---
+layout: null
+group : ppt
+title : "Swift Adminitrator Guid - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Swift Adminitrator Guid - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1><a href="http://docs.openstack.org/developer/swift/admin_guide.html" target="_blank">Swift Administrator Guid</a></h1>
+<p><small>2016-06-27 何通庆</small></p>
+<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Defining Storage Policies</h1>
+<ul>
+<li>High level view of steps it takes to configure policies<ul>
+<li>Define your policies in /etc/swift/swift.conf</li>
+<li>Create the corresponding object rings</li>
+<li>Communicate the names of the Storage Policies to cluster users</li>
+</ul>
+</li>
+<li>Configuring more than one storage policy on your development environment is recommended
+but optional</li>
+<li>Policies are implemented at the container level</li>
+<li>Policies are assigned when a container is created.(by optional header)</li>
+<li>Once a container has been assigned a policy, it cannot be changed.<pre><code class="bash">curl -v -X PUT -H &#39;X-Auth-Token: &lt;your auth token&gt;&#39; -H &#39;X-Storage-Policy: gold&#39; http://127.0.0.1:8080/v1/AUTH_test/myCont0
+</code></pre>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<h1>Erasure Code</h1>
+<ul>
+<li>纠删码:将数据分割成不可识别的数据块，使用额外的信息追加到每个数据块中，允许从一些数据块
+的子集就可以复原完整的数据集</li>
+<li>有内置的数据安全性，因为每个独立的数据块不包含足以泄露原始数据集的信息</li>
+<li>更适合用于大数据集，特别适合云计算和分布式存储，因为它不用复制数据集就可以跨多个地理位置
+分布数据</li>
+<li>替代RAID</li>
+<li>PyECLib: External Erasure Code Library</li>
+<li>ref: <a href="http://docs.openstack.org/developer/swift/overview_erasure_code.html" target="_blank">http://docs.openstack.org/developer/swift/overview_erasure_code.html</a></li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Container Reconciler</h1>
+<ul>
+<li>What would happen if 2 containers of the same name were created with different Storage
+Policies on either side of a network outage at the same time?</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>

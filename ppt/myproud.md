@@ -162,6 +162,42 @@ dealed_total: 661717 usetime: 189.090950012 rate: 3499.46414652
 [/note]
 
 [slide]
+# 客户端无法收到应答
+
+<small>2015-12-09 智慧云</small>
+
+[slide]
+# 问题描述
+----
+- 有个别智慧云pc客户端总是同步不成功，抓包看到客户端发送了MsgID=3的包到服务器，服务器正常接收并且返回ack,然后客户端收不到MsgID=3的应答，等待300秒超时，发送了RST。
+- 查看服务器端口使用情况：
+```bash
+netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+TIME_WAIT 3042
+CLOSE_WAIT 7
+FIN_WAIT1 178
+FIN_WAIT2 107
+ESTABLISHED 4764
+SYN_RECV 15
+CLOSING 2
+LAST_ACK 36
+```
+- 很多TIME_WAIT，因TIME_WAIT出现在主动关闭的一端，说明服务器进行了主动关闭，导致服务器没有
+  下发应答
+- 但一般情况服务器应该不会主动关闭连接。这个原因尚未查找
+
+[slide]
+# 解决方法
+- edit /etc/sysctl.conf
+```bash
+# 开启TIME_WAIT端口重用，默认为0，表示关闭
+net.ipv4.tcp_tw_reuse = 1 
+# 开启TIME_WAIT端口的快速回收，默认为0，表示等待60秒以便接收剩余数据
+net.ipv4.tcp_tw_recycle = 1
+```
+- 修改完之后执行`/sbin/sysctl -p`让参数生效 
+
+[slide]
 # JVM内存调优与GC优化
 
 <small>2014-10-23 智慧云</small>
