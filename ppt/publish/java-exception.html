@@ -1,0 +1,283 @@
+---
+layout: null
+group : ppt
+title : "java exception - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>java exception - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Java异常</h1>
+
+</hgroup><article>
+
+<ul>
+<li>异常机制</li>
+<li>异常分类</li>
+<li>Exception vs. Error</li>
+<li>检查异常 vs. 非检查异常</li>
+<li>常见问题</li>
+<li><p>设计经验</p>
+<ul>
+<li><font size=3>2016-11-15 何通庆 <a href="https://kkshare.github.io" target="_blank">主页</a></font></li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>异常机制</h2>
+
+</hgroup><article>
+
+<ul>
+<li>提供程序退出的安全通道</li>
+<li>程序的控制权转移到异常处理器<ul>
+<li>方法立即结束,不返回值,同时抛出一个异常对象</li>
+<li>调用该方法的程序也不会继续执行下去</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>异常分类</h2>
+
+</hgroup><article>
+
+<img src="../../images/java-exception.jpeg" alt="">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>Exception vs. Error</h2>
+
+</hgroup><article>
+
+<ul>
+<li>Error:合理的应用程序不应该试图捕获的严重问题</li>
+<li>Exception:合理的应用程序想要捕获的条件</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>检查异常 vs. 非检查异常</h2>
+
+</hgroup><article>
+
+<ul>
+<li>检查异常(Checked Exception)<ul>
+<li>继承Exception</li>
+<li>必须通过try/catch处理，或者throws抛出，否则编译出错</li>
+</ul>
+</li>
+<li>非检查异常(Unchecked Exception)<ul>
+<li>继承RuntimeException</li>
+<li>可以不经过try/catch处理，或者throws抛出</li>
+<li>一般由系统处理</li>
+<li>也可以由用户处理(主要针对业务系统，抛出友好的提示)</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>常见问题</h2>
+
+</hgroup><article>
+
+<ul>
+<li>日志打印<ul>
+<li>是否需要打印堆栈信息，哪个逻辑层打印日志</li>
+</ul>
+</li>
+<li>异常信息丢失<ul>
+<li>catch了未抛出，未打印日志等</li>
+</ul>
+</li>
+<li>未处理的RuntimeExceptoin</li>
+<li>过度使用异常</li>
+<li>总结：功能-性能-可读(简洁)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>过度使用异常</h2>
+
+</hgroup><article>
+
+<pre><code class="bash">//方法1:
+return new Response(status,code,msg1,msg2,obj1);
+//方法2:
+try{
+    throw new MyException(status,code,msg1,msg2,obj1);
+}catch(MyException e){
+    return new Response(e.status,e.code,e.msg1,e.msg2,e.obj1);
+}
+</code></pre>
+<ul>
+<li>原因：不愿意编写处理错误代码时抛出一个异常即可(方便)</li>
+<li>对完全已知的错误，应编写处理这种错误的代码，增加鲁棒性</li>
+<li><em>异常机制的效率很差</em></li>
+<li>方法2使异常设计复杂</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>过度使用异常</h2>
+<ul>
+<li>关键是区分系统异常与业务异常</li>
+<li>系统异常<ul>
+<li>软件的缺陷，客户端对此通常无能为力</li>
+<li>通常报500错误即可</li>
+<li>一般是非检查异常</li>
+</ul>
+</li>
+<li>业务异常<ul>
+<li>用户未按正常流程操作导致的异常</li>
+<li>非500错误</li>
+<li>通常是检查异常</li>
+</ul>
+</li>
+<li>建议：非500错误能不通过异常处理尽量不要通过异常方式</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>解决方法： </p>
+<ul>
+<li>错误提示的文案统一放在一个配置文件里，根据异常类型获取对应的错误提示信息，若需要支持国际化还可以提供多个语言的版本</li>
+<li>如果不能放到配置文件里，定义成常量放在同一个类中也是可以的</li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h2>设计经验-异常消息</h2>
+
+</hgroup><article>
+
+<pre><code class="java">//方式1:
+class Constants{
+    public final static String MSG1 = &quot;msg1&quot;;
+    public final static String MSG2 = &quot;msg2&quot;;
+    public final static String MSG3 = &quot;msg3&quot;;
+}
+//&quot;_ex_1234&quot;是为了方便定位异常增加的唯一标记,_ex_是为了方便查找、排重
+throw new ServiceException(Constants.MSG1,&quot;_ex_1234&quot;);
+
+//方式2:
+Msg1Exception extends Exception{msg=&quot;msg1&quot;}
+Msg2Exception extends Exception{msg=&quot;msg2&quot;}
+Msg3Exception extends Exception{msg=&quot;msg3&quot;}
+</code></pre>
+<ul>
+<li>方式一减少了异常类的维护,方便跟踪定位异常</li>
+<li>如果信息需要展示用户，属于文案范畴，文案易变动，最好不要跟程序混在一起</li>
+<li>如果信息属于多个组件共享内容，也应该属于文档范畴</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>设计经验</h2>
+<ul>
+<li>异常设计需要统一规划</li>
+<li>打印日志：只在一个地方打印日志，不重复打印日志。不遵守契约的异常不打印堆栈信息</li>
+<li><p>检查型异常和非检查型异常</p>
+<ul>
+<li>如果希望客户程序员有意识地采取措施，那么抛出检查型异常。</li>
+<li>使用非检查异常代码会比较简洁(不需要throws,减少很多try/catch)</li>
+</ul>
+</li>
+<li><p>end</p>
+</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
