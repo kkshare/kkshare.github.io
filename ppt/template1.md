@@ -8,9 +8,8 @@ theme: dark
 
 # 演讲主题
 ## 二级标题
-<small>2016-04-26 何通庆</small>
 
-[主页](https://kkshare.github.io)
+### <font size=3>2016-11-15 何通庆 [主页](https://kkshare.github.io)</font>
 
 [note]
 - 这是备注，按键盘“N”显示
