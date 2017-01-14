@@ -85,5 +85,6 @@ c21 |c22 |c23 |c24
 - N键显示备注
 - P键使用画笔，B/Y/R/G/M键更换颜色 1～4键更换粗细 C键清空画板
 - alt+click 点击地方放大，再做一次会缩小(需要zoom.js)
-
+- cmd+-/+ 缩小或放大字体
+- chrome(视图)，safari(显示)去掉工具栏
  * end of ppt,thanks! {:&.rollIn}
