@@ -26,3 +26,28 @@ tagline: "2016-04-15"
 ## 创建数据库名
 
 右键工程->properties->Database->New
+
+## display
+
+Tools -> Display Preferences... -> 
+    General -> Window Color
+
+Tools -> Model Options -> Name Convention -> 右侧display中选择显示name还是code
+
+## other
+
+- 生成sql语句 database --> generate database ....
+- 导入sql到pd 反向工程
+    file --> reverse engineer -->database....-->MYSQL5.0-->Using script files
+- 设置 name不自动等于code
+    Tools -> General Options -> Dialog -> 将Name to Code mirroring 上的钩去掉
+- 把设计图导出成图片
+    选择要导出的对象 -> Edit—>Export Image
+- 去掉SQL脚本中的双引号
+    Database → Edit Current DBMS → General → Script → Sql → Format → CaseSensitivityUsingQuote设为NO
+- 使用MySQL的auto_increment
+     打开table properties窗口 → columns → 选中id列 → 打开columns properties窗口 → 勾选identity
+     注意：概念模型没有此选项，物理模型才有
+
+
+
