@@ -27,8 +27,8 @@ title : "mytest-适合自己的单元测试 - By kk"
     <slides id="container">
         <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>mytest</h1>
-<p><small>2016-06-06 何通庆</small></p>
-<p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
+<h2>适合自己的测试</h2>
+<h3><font size=3>2016-11-15 何通庆 <a href="https://kkshare.github.io" target="_blank">主页</a></font></h3>
 
 </article></section></slide>
 <slide class="slide hasnote"><aside class="note">
@@ -90,7 +90,7 @@ title : "mytest-适合自己的单元测试 - By kk"
 <li>熟悉常用工具、脚本(shell/python)</li>
 <li>熟悉debug/remote debug</li>
 <li>利用配置文件(config/hosts)</li>
-<li>采用广度优先策略定位BUG</li>
+<li>考虑本地测试</li>
 </ul>
 
 </article></section></slide>
@@ -170,24 +170,56 @@ set JAVA_OPTS=%JAVA_OPTS% %JPDA_OPTS%
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>4A 测试介绍</h1>
-<pre><code>main(){
-    allTest();
-    //test1();
-}
-void allTest(){
-    before();//准备测试数据
-    test1();
-    test2();
-    ...
-    after();//清除测试数据
-}
-</code></pre>
+<h1>考虑本地测试</h1>
+<ul class="rollIn">
+<li>开发人员需要在本地部署所有依赖组件<ul>
+<li>开发人员对整个系统更加熟悉,并能够更全面的考虑问题</li>
+<li>使团队的协作也更紧密，整个系统更加简单、稳定</li>
+<li>有利于解决人员备份问题</li>
+</ul>
+</li>
+<li>提高开发效率<ul>
+<li>方便调试</li>
+<li>方便增加临时日志、临时代码</li>
+<li>不干扰别人测试，也不受别人测试干扰</li>
+<li>不需要上传文件，避免网络问题的影响</li>
+<li>提高svn的代码的质量，避免svn代码的碎片化</li>
+</ul>
+</li>
+</ul>
+
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>不断改进</h1>
+<h1>其他问题</h1>
 <ul class="rollIn">
-<li>facebook：让亲身实践者执行工作流程<ul>
+<li>制造测试数据无法立即生效<ul>
+<li>提前制造测试数据，并对测试数据进行特殊(前缀)标记</li>
+<li>程序对特殊标记的测试数据进行特殊处理</li>
+</ul>
+</li>
+<li>计算复杂，需要比较长时间才能输出结果<ul>
+<li>提高程序性能，多线程或多进程处理</li>
+<li>如果可以的话用少量数据测试</li>
+</ul>
+</li>
+<li>输出结果复杂，需要人工参与验证:趋势法<ul>
+<li>第一个用例的输入输出进行人工确认</li>
+<li>微调第一个用例的输出，分析输出变化的趋势</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>制造测试数据更加容易体现着以下方面：</p>
+<ol>
+<li>直接调用已经封装好的接口</li>
+<li>所有用例共享一份制造的数据，避免重复制造</li>
+</ol>
+<h1>不断改进</h1>
+<ul>
+<li>facebook：让亲身实践者执行工作流程 {:&amp;.rollIn}<ul>
 <li>个人制定并执行的工作流程，会针对真实工作的情况进行更多优化调整。
 管理者设计的工作流程，最多能接近实际工作流程，它需要管理、优化或整理。
 这是许多愚蠢、低效的工作流程的来源。</li>
@@ -196,6 +228,30 @@ void allTest(){
 外部强加的（自上而下的）工作流程更加难以打破，而且往往会被神化，从而产生非常大的组织惯性。</li>
 </ul>
 </li>
+</ul>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>测试举例</h1>
+<pre><code>main(){
+    allTest();
+    //testLogin(param);
+}
+void allTest(){
+    before();//准备测试数据
+    testCreateUser(param1);
+    testCreateUser(param2);
+    testDeleteUser(param2);
+    testLogin(param1);
+    ...
+    after();//清除测试数据
+}
+</code></pre><p>与单元测试区别</p>
+<ul>
+<li>方便测试参数边界(也可用JUnit的参数化测试)</li>
+<li>方便进行性能测试</li>
+<li>制造测试数据更加容易</li>
+<li>容易了解系统整体业务流程</li>
 </ul>
 
 </article></section></slide>
