@@ -99,6 +99,8 @@ theme: dark
 # 熟悉debug/remote debug
 - 对复现困难的BUG {:&.rollIn}
 - 本地环境不满足要求
+- 克服log调试的缺点:低效繁琐、忘记删除
+ * 改代码有风险(参考下一页)
 - remote debug(netbeans)   
 edit ${TOMCAT_HOME}/bin/catalina.sh
 ```

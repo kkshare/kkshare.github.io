@@ -145,6 +145,10 @@ title : "mytest-适合自己的单元测试 - By kk"
 <ul class="rollIn">
 <li>对复现困难的BUG</li>
 <li>本地环境不满足要求</li>
+<li>克服log调试的缺点:低效繁琐、忘记删除<ul>
+<li>改代码有风险(参考下一页)</li>
+</ul>
+</li>
 <li>remote debug(netbeans)<br>edit ${TOMCAT_HOME}/bin/catalina.sh<pre><code>set JPDA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n
 set JAVA_OPTS=%JAVA_OPTS% %JPDA_OPTS%
 </code></pre>netbeans-&gt;调试-&gt;连接调试器-&gt;port=8787</li>
