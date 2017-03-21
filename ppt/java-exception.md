@@ -57,7 +57,8 @@ theme: dark
  * catch了未抛出，未打印日志等
 - 未处理的RuntimeExceptoin
 - 过度使用异常
-- 总结：功能-性能-可读(简洁)
+- finally块中的异常处理
+- *需要综合考虑功能、性能、可读(简洁)*
 
 [slide]
 ## 过度使用异常
@@ -100,8 +101,8 @@ class Constants{
     public final static String MSG2 = "msg2";
     public final static String MSG3 = "msg3";
 }
-//"_ex_1234"是为了方便定位异常增加的唯一标记,_ex_是为了方便查找、排重
-throw new ServiceException(Constants.MSG1,"_ex_1234");
+
+throw new ServiceException(Constants.MSG1,400);//400表示状态码
 
 //方式2:
 Msg1Exception extends Exception{msg="msg1"}
@@ -125,4 +126,31 @@ Msg3Exception extends Exception{msg="msg3"}
   * 如果希望客户程序员有意识地采取措施，那么抛出检查型异常。
   * 使用非检查异常代码会比较简洁(不需要throws,减少很多try/catch)
 
-- end
+[slide]
+## 设计经验(例子)
+----
+```java
+public class Status {
+    public int status;
+    public String code;
+    
+    public static Status OK = new Status(200,"OK");
+    public static Status NOT_FOUND = new Status(404,"NOT FOUND");
+    public static Status REQUEST_TIMEOUT = new Status(408,"REQUEST TIMEOUT");
+    public static Status RETRY_LATER = new Status(417,"RETRY LATER");
+    public static Status SREVER_INTERNAL_ERROR = new Status(500,"SERVER INTERNAL ERROR");
+    public static Status PROCESSING_ERROR = new Status(506,"PROCESSING ERROR");
+}
+public class ServiceException extends Exception {
+    private Status status;
+    public Status getStatus() { return status; }
+
+    public ServiceException(String msg) { this(msg, null, Status.PROCESSING_ERROR); }
+    public ServiceException(String msg, Status status) { this(msg, null, status); }
+    public ServiceException(String msg, Throwable cause) { this(msg, cause, Status.PROCESSING_ERROR); }
+    public ServiceException(Throwable cause) { this(cause.getMessage(), cause, Status.PROCESSING_ERROR); }
+    public ServiceException(String msg, Throwable cause, Status status) { super(msg, cause); this.status = status; }
+}
+```
+
+* Thanks! (The End)

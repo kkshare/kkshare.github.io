@@ -115,7 +115,8 @@ title : "java exception - By kk"
 </li>
 <li>未处理的RuntimeExceptoin</li>
 <li>过度使用异常</li>
-<li>总结：功能-性能-可读(简洁)</li>
+<li>finally块中的异常处理</li>
+<li><em>需要综合考虑功能、性能、可读(简洁)</em></li>
 </ul>
 
 </article></section></slide>
@@ -181,8 +182,8 @@ class Constants{
     public final static String MSG2 = &quot;msg2&quot;;
     public final static String MSG3 = &quot;msg3&quot;;
 }
-//&quot;_ex_1234&quot;是为了方便定位异常增加的唯一标记,_ex_是为了方便查找、排重
-throw new ServiceException(Constants.MSG1,&quot;_ex_1234&quot;);
+
+throw new ServiceException(Constants.MSG1,400);//400表示状态码
 
 //方式2:
 Msg1Exception extends Exception{msg=&quot;msg1&quot;}
@@ -201,14 +202,43 @@ Msg3Exception extends Exception{msg=&quot;msg3&quot;}
 <ul>
 <li>异常设计需要统一规划</li>
 <li>打印日志：只在一个地方打印日志，不重复打印日志。不遵守契约的异常不打印堆栈信息</li>
-<li><p>检查型异常和非检查型异常</p>
-<ul>
+<li>检查型异常和非检查型异常<ul>
 <li>如果希望客户程序员有意识地采取措施，那么抛出检查型异常。</li>
 <li>使用非检查异常代码会比较简洁(不需要throws,减少很多try/catch)</li>
 </ul>
 </li>
-<li><p>end</p>
-</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>设计经验(例子)</h2>
+
+</hgroup><article>
+
+<pre><code class="java">public class Status {
+    public int status;
+    public String code;
+
+    public static Status OK = new Status(200,&quot;OK&quot;);
+    public static Status NOT_FOUND = new Status(404,&quot;NOT FOUND&quot;);
+    public static Status REQUEST_TIMEOUT = new Status(408,&quot;REQUEST TIMEOUT&quot;);
+    public static Status RETRY_LATER = new Status(417,&quot;RETRY LATER&quot;);
+    public static Status SREVER_INTERNAL_ERROR = new Status(500,&quot;SERVER INTERNAL ERROR&quot;);
+    public static Status PROCESSING_ERROR = new Status(506,&quot;PROCESSING ERROR&quot;);
+}
+public class ServiceException extends Exception {
+    private Status status;
+    public Status getStatus() { return status; }
+
+    public ServiceException(String msg) { this(msg, null, Status.PROCESSING_ERROR); }
+    public ServiceException(String msg, Status status) { this(msg, null, status); }
+    public ServiceException(String msg, Throwable cause) { this(msg, cause, Status.PROCESSING_ERROR); }
+    public ServiceException(Throwable cause) { this(cause.getMessage(), cause, Status.PROCESSING_ERROR); }
+    public ServiceException(String msg, Throwable cause, Status status) { super(msg, cause); this.status = status; }
+}
+</code></pre>
+<ul>
+<li>Thanks! (The End)</li>
 </ul>
 
 </article></section></slide>

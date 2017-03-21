@@ -24,6 +24,7 @@ macbook
     cmd-shift-4 选择区域，释放鼠标    区域截图
 
     ctrl-cmd-D 屏幕取词
+    ctrl-shift-space 手写输入
 
 mou
 
