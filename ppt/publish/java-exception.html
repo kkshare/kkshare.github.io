@@ -31,14 +31,45 @@ title : "java exception - By kk"
 </hgroup><article>
 
 <ul>
-<li>异常机制</li>
-<li>异常分类</li>
+<li>为何要关注异常</li>
+<li>异常机制与分类</li>
 <li>Exception vs. Error</li>
 <li>检查异常 vs. 非检查异常</li>
 <li>常见问题</li>
 <li><p>设计经验</p>
 <ul>
 <li><font size=3>2016-11-15 何通庆 <a href="https://kkshare.github.io" target="_blank">主页</a></font></li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>小问题:影响小+小概率</p>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h2>为何要关注异常</h2>
+
+</hgroup><article>
+
+<ul>
+<li>异常不是小问题</li>
+<li><img src="http://www.ctocio.com/wp-content/uploads/2014/09/backblaze-ctocio.jpg" alt=""></li>
+<li><a href="http://www.ctocio.com/ccnews/16730.html" target="_blank">Backblaze对其数据中心38000块硬盘的统计</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>为何要关注异常</h2>
+<ul>
+<li>我们身边异常每天都在发生<ul class="rollIn">
+<li>设备多</li>
+<li>数据量大</li>
+<li>持续运行</li>
+<li>38000 * 2%=760 平均每天多于两块硬盘故障</li>
+<li>故障率 CPU&gt;MEM&gt;DISK&gt;MAINBORD</li>
 </ul>
 </li>
 </ul>
@@ -230,11 +261,11 @@ public class ServiceException extends Exception {
     private Status status;
     public Status getStatus() { return status; }
 
-    public ServiceException(String msg) { this(msg, null, Status.PROCESSING_ERROR); }
-    public ServiceException(String msg, Status status) { this(msg, null, status); }
-    public ServiceException(String msg, Throwable cause) { this(msg, cause, Status.PROCESSING_ERROR); }
-    public ServiceException(Throwable cause) { this(cause.getMessage(), cause, Status.PROCESSING_ERROR); }
-    public ServiceException(String msg, Throwable cause, Status status) { super(msg, cause); this.status = status; }
+    public ServiceException(String msg);
+    public ServiceException(String msg, Status status);
+    public ServiceException(String msg, Throwable cause);
+    public ServiceException(Throwable cause);
+    public ServiceException(String msg, Throwable cause, Status status);
 }
 </code></pre>
 <ul>

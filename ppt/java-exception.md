@@ -8,14 +8,33 @@ theme: dark
 
 # Java异常
 ----
-- 异常机制
-- 异常分类
+- 为何要关注异常
+- 异常机制与分类
 - Exception vs. Error
 - 检查异常 vs. 非检查异常
 - 常见问题
 - 设计经验
 
  * <font size=3>2016-11-15 何通庆 [主页](https://kkshare.github.io)</font>
+
+[slide]
+## 为何要关注异常
+----
+- 异常不是小问题
+- ![](http://www.ctocio.com/wp-content/uploads/2014/09/backblaze-ctocio.jpg)
+- [Backblaze对其数据中心38000块硬盘的统计](http://www.ctocio.com/ccnews/16730.html)
+[note]
+小问题:影响小+小概率
+[/note]
+
+[slide]
+## 为何要关注异常
+- 我们身边异常每天都在发生
+ * 设备多 {:&.rollIn}
+ * 数据量大
+ * 持续运行
+ * 38000 * 2%=760 平均每天多于两块硬盘故障
+ * 故障率 CPU>MEM>DISK>MAINBORD
 
 [slide]
 ## 异常机制
@@ -145,11 +164,11 @@ public class ServiceException extends Exception {
     private Status status;
     public Status getStatus() { return status; }
 
-    public ServiceException(String msg) { this(msg, null, Status.PROCESSING_ERROR); }
-    public ServiceException(String msg, Status status) { this(msg, null, status); }
-    public ServiceException(String msg, Throwable cause) { this(msg, cause, Status.PROCESSING_ERROR); }
-    public ServiceException(Throwable cause) { this(cause.getMessage(), cause, Status.PROCESSING_ERROR); }
-    public ServiceException(String msg, Throwable cause, Status status) { super(msg, cause); this.status = status; }
+    public ServiceException(String msg);
+    public ServiceException(String msg, Status status);
+    public ServiceException(String msg, Throwable cause);
+    public ServiceException(Throwable cause);
+    public ServiceException(String msg, Throwable cause, Status status);
 }
 ```
 

@@ -1,0 +1,253 @@
+---
+layout: null
+group : ppt
+title : "java 日志 - By kk"
+---
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.1
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>java 日志 - By kk</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>java 日志</h1>
+<h3><font size=3>2017-03-25 何通庆 <a href="https://kkshare.github.io" target="_blank">主页</a></font></h3>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>我们关心的问题</h2>
+<ul>
+<li>可分开:功能上、时间上</li>
+<li>配置:日志级别、动态修改、其它</li>
+<li>管理:自动归档、定时清理</li>
+<li>系统的稳定、健壮</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>WHY NOT System.out.println</h2>
+
+</hgroup><article>
+
+<ul>
+<li>格式不规范：没有时间、level、source...</li>
+<li>调试完成无法关闭，或忘记删除</li>
+<li>关闭后无法再次打开，无法在线上调试</li>
+<li>输出容易被忽略，导致无法登录服务器的危险<pre><code>如果不重定向，输出内容会以邮件的形式发送给用户，内容存储在邮件文件：
+/var/spool/mail/$user
+如果输出内容较多，会使这个邮件文件不断追加内容，文件越来越大。
+而邮件文件一般存放在根分区，根分区一般相对较小，
+所以会造成根分区写满而无法登录服务器。
+</code></pre></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>WHY NOT e.printStackTrace</h2>
+
+</hgroup><article>
+
+<ul>
+<li>有System.out.println的所有问题</li>
+<li>剥夺了上层应用处理处理异常的机会</li>
+<li>出现无法预知的问题<ul class="rollIn">
+<li>请使用<pre><code class="java">try{
+//...
+}cache(Exception e){
+logger.error(&quot;msg&quot;,e);
+throw new ServiceException(&quot;msg&quot;,e[,status]);
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>log4j基本概念</h2>
+
+</hgroup><article>
+
+<ul>
+<li>logger是源，appender是目标
+<img src="../../images/loggerAndAppender.png" alt=""></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>配置实例</h2>
+<pre><code>log4j.rootLogger=INFO,console
+log4j.logger.smart=INFO,smart #第一个smart是logger，第二个smart是appender
+log4j.logger.com.cnc.dna=INFO,dna
+log4j.additivity.smart=false  #false:阻止回流
+# appender for console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.Encoding=UTF-8
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %c %-5p: %m%n
+# appender for smart
+log4j.appender.smart=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.smart.File=./logs/smart.log
+log4j.appender.smart.DatePattern=&#39;.&#39;yyyy-MM-dd
+log4j.appender.smart.layout=org.apache.log4j.PatternLayout
+log4j.appender.smart.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %c %-5p: %m%n
+# appender for dna
+...
+</code></pre><ul class="flexbox vleft">
+<li>log4j.logger.smart=INFO,smart<ul>
+<li>第一个smart是logger，第二个smart是appender</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>提问</h2>
+
+</hgroup><article>
+
+<pre><code class="java">private static final Logger log = LoggerFactory.getLogger(&quot;smart&quot;);
+</code></pre>
+<ul class="flexbox vleft">
+<li>&quot;smart&quot;是logger还是appender ？</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>指定配置文件</h2>
+
+</hgroup><article>
+
+<pre><code>static{
+     String path = ConfigUtil.SMART_HOME+&quot;/config/log4j.properties&quot;;
+     PropertyConfigurator.configure(path);//指定配置文件路径
+     PropertyConfigurator.configureAndWatch(path, 30000);//动态修改无需重启立即生效
+}
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>logger规划</h2>
+
+</hgroup><article>
+
+<ul>
+<li>LoggerFactory.getLogger(ClassName.class)<pre><code>2016-11-23 09:19:45.820 WARN [com.cnc.portal.metrics.report.GDCollectorReporter] msg...
+2016-11-23 09:19:45.820 WARN [com.cnc.portal.msgn.member.cluster.Heartbeat.logErrorMessage] msg...
+2016-11-23 09:19:45.820 WARN [om.cnc.portal.msgn.member.client.ClientConnection.error] msg...
+</code></pre></li>
+<li>OR LoggerFactory.getLogger(&lt;常量&gt;)?<pre><code>2016-11-23 09:19:45.820 WARN [smart] msg...
+2016-11-23 09:19:45.820 WARN [smart] msg...
+2016-11-23 09:19:45.820 WARN [smart] msg...
+</code></pre></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>logger规划</h2>
+<pre><code>public class ULoggerFactory {
+    public static final String BASE_NAME = &quot;smart&quot;;
+    public ULoggerFactory() { super(); } 
+    public static Logger getLogger(String name) {
+        if (name != null &amp;&amp; !name.equals(&quot;root&quot;) &amp;&amp; !name.startsWith(BASE_NAME)) {
+            StringBuffer sb = new StringBuffer(LOGGER_BASE_NAME);
+            sb.append(&#39;.&#39;).append(name);
+            name = sb.toString();
+        }
+        return LoggerFactory.getLogger(name);
+    }
+    public static Logger getSmartLogger() { return LoggerFactory.getLogger(&quot;smart&quot;); } 
+}
+</code></pre><ul class="flexbox vleft">
+<li>避免忘记写BASE_NAME问题<ul class="rollIn">
+<li>Thanks! (The End)</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.1</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
