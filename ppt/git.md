@@ -10,7 +10,6 @@ theme: dark
 ## 基本工作原理与常用命令 
 ### <font size=3>2016-11-15 何通庆 [主页](https://kkshare.github.io)</font>
 
-[主页](https://kkshare.github.io)
 
 [slide]
 # 版本管理软件历史
