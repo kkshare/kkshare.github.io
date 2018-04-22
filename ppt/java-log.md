@@ -20,6 +20,7 @@ theme: dark
 [slide]
 ## WHY NOT System.out.println
 ----
+- 输出到控制台的速度比输出到文件系统的速度要慢
 - 格式不规范：没有时间、level、source...
 - 调试完成无法关闭，或忘记删除
 - 关闭后无法再次打开，无法在线上调试

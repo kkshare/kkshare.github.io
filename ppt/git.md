@@ -8,7 +8,7 @@ theme: dark
 
 # Git
 ## 基本工作原理与常用命令 
-<small>2016-06-08 何通庆</small>
+### <font size=3>2016-11-15 何通庆 [主页](https://kkshare.github.io)</font>
 
 [主页](https://kkshare.github.io)
 
@@ -91,19 +91,16 @@ theme: dark
 
 [slide]
 # 创建仓库
-- 在现有目录中初始化仓库
+- 创建纯本地仓库
 ```bash
 mkdir myrepo;cd myrepo
 git init
 ```
-- 克隆现有的仓库
+- 创建与远程仓库关联(跟踪)的本地仓库
 ```bash
 git clone https://ebentest@github.com/ebentest/ppt.git myppt
 git clone git@github.com:ebentest/ppt.git myppt    #SSH
 ```
-- 现在我们有两个仓库
- * myrepo: 纯本地仓库
- * myppt: 与远程仓库关联(跟踪)的本地仓库
 
 [slide]
 # 更新文件

@@ -28,7 +28,7 @@ title : "Git基本工作原理与常用命令 - By kk"
         <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>Git</h1>
 <h2>基本工作原理与常用命令</h2>
-<p><small>2016-06-08 何通庆</small></p>
+<h3><font size=3>2016-11-15 何通庆 <a href="https://kkshare.github.io" target="_blank">主页</a></font></h3>
 <p><a href="https://kkshare.github.io" target="_blank">主页</a></p>
 
 </article></section></slide>
@@ -196,18 +196,13 @@ title : "Git基本工作原理与常用命令 - By kk"
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>创建仓库</h1>
 <ul>
-<li>在现有目录中初始化仓库<pre><code class="bash">mkdir myrepo;cd myrepo
+<li>创建纯本地仓库<pre><code class="bash">mkdir myrepo;cd myrepo
 git init
 </code></pre>
 </li>
-<li>克隆现有的仓库<pre><code class="bash">git clone https://ebentest@github.com/ebentest/ppt.git myppt
+<li>创建与远程仓库关联(跟踪)的本地仓库<pre><code class="bash">git clone https://ebentest@github.com/ebentest/ppt.git myppt
 git clone git@github.com:ebentest/ppt.git myppt    #SSH
 </code></pre>
-</li>
-<li>现在我们有两个仓库<ul>
-<li>myrepo: 纯本地仓库</li>
-<li>myppt: 与远程仓库关联(跟踪)的本地仓库</li>
-</ul>
 </li>
 </ul>
 
