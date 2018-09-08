@@ -274,4 +274,31 @@ git svn clone file:///opt/svn.repo.loc --no-metadata --trunk=trunk draft.repo
 - 有些命令跟svn很像
 [/note]
 
+[slide]
+# 高级用法-git-crypt
+- (git-crypt](https://www.jianshu.com/p/a40fc90df943) and [gpg](https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html)
+```
+#install
+brew install git-crypt
+brew install gpg
+#
+gpg --full-gen-key     # 生成密钥（公钥和私钥），按照流程提示进行
+gpg --list-keys        # 会列出当前所有的密钥，检查刚才的密钥是否生成成功 
+gpg --edit-key [key]   #获取ID 交互方式修改expire
+gpg --delete-secret-and-public-key [ID] 
+cd path/to/project
+git-crypt init   //将公钥放到 .git-crypt/keys/default/0/*.gpg
+git-crypt add-gpg-user kelvv    # 添加密钥用户，这里以用户kelvv为例，可以添加多个用户
+vim .gitattributes
+enc/a.conf filter=git-crypt diff=git-crypt
+enc/b.conf filter=git-crypt diff=git-crypt
+
+git rm -r --cached enc/     #清理config的git缓存
+git-crypt export-key /path/to/git-crypt-key
+git-crypt unlock /path/to/git-crypt-key
+```
+
+[note]
+[/note]
+
  * end of ppt,thanks! {:&.rollIn}
