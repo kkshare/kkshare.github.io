@@ -99,6 +99,7 @@ git init
 ```bash
 git clone https://ebentest@github.com/ebentest/ppt.git myppt
 git clone git@github.com:ebentest/ppt.git myppt    #SSH
+git clone ssh://192.168.0.22:2000/path/to/git      #ssh+git
 ```
 
 [slide]
@@ -226,6 +227,13 @@ git config --global core.editor vim
 git config --list 列出所有配置,检查配置
 git config core.quotepath false 文件名中文显示
 ```
+[note]
+无密码登录
+vim .git-credentials
+https://{username}:{password}@github.com
+    git config --global credential.helper store
+可以看到~/.gitconfig文件，会多了一项：
+    helper = store
 [slide]
 # 别名
 ```bash
@@ -287,13 +295,18 @@ gpg --list-keys        # 会列出当前所有的密钥，检查刚才的密钥�
 gpg --edit-key [key]   #获取ID 交互方式修改expire
 gpg --delete-secret-and-public-key [ID] 
 cd path/to/project
-git-crypt init   //将公钥放到 .git-crypt/keys/default/0/*.gpg
-git-crypt add-gpg-user kelvv    # 添加密钥用户，这里以用户kelvv为例，可以添加多个用户
+git-crypt init                 #初始化
+git-crypt add-gpg-user hetq    # 添加密钥用户，这里以用户hetq为例，可以添加多个用户
+                               #将公钥放到 .git-crypt/keys/default/0/*.gpg
 vim .gitattributes
 enc/a.conf filter=git-crypt diff=git-crypt
 enc/b.conf filter=git-crypt diff=git-crypt
 
 git rm -r --cached enc/     #清理config的git缓存
+git add .
+git commit -m 'git-crypt'
+git push
+
 git-crypt export-key /path/to/git-crypt-key
 git-crypt unlock /path/to/git-crypt-key
 ```
