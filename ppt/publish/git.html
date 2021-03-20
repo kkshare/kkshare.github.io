@@ -199,8 +199,9 @@ title : "Git基本工作原理与常用命令 - By kk"
 git init
 </code></pre>
 </li>
-<li>创建与远程仓库关联(跟踪)的本地仓库<pre><code class="bash">git clone https://ebentest@github.com/ebentest/ppt.git myppt
-git clone git@github.com:ebentest/ppt.git myppt    #SSH
+<li>创建与远程仓库关联(跟踪)的本地仓库<pre><code class="bash">git clone https://ebentest@github.com/ebentest/ppt.git
+git clone git@github.com:ebentest/ppt.git          #SSH
+git clone ssh://192.168.0.22:2000/path/to/git      #ssh+git
 </code></pre>
 </li>
 </ul>
@@ -362,7 +363,13 @@ git config --global core.editor vim
 git config --list 列出所有配置,检查配置
 git config core.quotepath false 文件名中文显示
 </code></pre>
-</li>
+[note]
+无密码登录
+vim .git-credentials
+<a href="https://{username}:{password}@github.com" target="_blank">https://{username}:{password}@github.com</a>
+  git config --global credential.helper store
+可以看到~/.gitconfig文件，会多了一项：
+  helper = store</li>
 </ul>
 
 </article></section></slide>
@@ -422,6 +429,88 @@ $ man git-&lt;verb&gt;
 <li><code>git log</code>   查看提交日志</li>
 <li><code>git status</code>检查状态</li>
 </ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>练习1</h1>
+<pre><code># 目录结构
+git
+  |-remote
+      |-test1 #repo1
+      |-test2 #repo2
+  |-local
+      |-test1 #repo1
+      |-test2 #repo2
+
+cd /d/git/remote/test1
+git init --bare
+cd /d/git/local
+git clone file:///d/git/remote/test1
+
+cd test1
+echo &quot;hello&quot; &gt; readme.txt
+git status
+git add readme.txt
+git status
+git commit -m &quot;add readme.txt&quot;
+git push
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>练习2</h1>
+<pre><code>git config --global http.sslVerify false # 解决证书不被信任问题
+cd /d/git/local
+git clone https://test1@192.168.35.13:978/ttchao/testx.git
+
+cd testx
+echo &quot;hello&quot; &gt;&gt; README.md
+git diff
+git commit -am &quot;update README.md&quot;
+git push
+git pull
+git status
+git remote -v
+git log1
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>练习3 IDEA</h1>
+<ul>
+<li>ctrl+k: commit</li>
+<li>ctrl+shift+k: push</li>
+<li>ctrl+t: update</li>
+<li>conflicts deal</li>
+<li>switch branch</li>
+<li>create branch</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>高级用法-git-crypt</h1>
+<ul>
+<li><a href="https://www.jianshu.com/p/a40fc90df943" target="_blank">git-crypt</a> and <a href="https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html" target="_blank">gpg</a>
+```<h1>install</h1>
+brew install git-crypt
+brew install gpg
+#
+gpg --full-gen-key     # 生成密钥（公钥和私钥），按照流程提示进行
+gpg --list-keys        # 会列出当前所有的密钥，检查刚才的密钥是否生成成功 
+gpg --edit-key [key]   #获取ID 交互方式修改expire
+gpg --delete-secret-and-public-key [ID] 
+cd path/to/project
+git-crypt init                 #初始化
+git-crypt add-gpg-user hetq    # 添加密钥用户，这里以用户hetq为例，可以添加多个用户<h1>将公钥放到 .git-crypt/keys/default/0/*.gpg</h1>
+vim .gitattributes
+enc/a.conf filter=git-crypt diff=git-crypt
+enc/b.conf filter=git-crypt diff=git-crypt</li>
+</ul>
+<p>git rm -r --cached enc/     #清理config的git缓存
+git add .
+git commit -m &#39;git-crypt&#39;
+git push</p>
+<p>git-crypt export-key /path/to/git-crypt-key
+git-crypt unlock /path/to/git-crypt-key
+```</p>
 <ul class="rollIn">
 <li>end of ppt,thanks!</li>
 </ul>

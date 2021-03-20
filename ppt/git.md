@@ -97,8 +97,8 @@ git init
 ```
 - 创建与远程仓库关联(跟踪)的本地仓库
 ```bash
-git clone https://ebentest@github.com/ebentest/ppt.git myppt
-git clone git@github.com:ebentest/ppt.git myppt    #SSH
+git clone https://ebentest@github.com/ebentest/ppt.git
+git clone git@github.com:ebentest/ppt.git          #SSH
 git clone ssh://192.168.0.22:2000/path/to/git      #ssh+git
 ```
 
@@ -283,8 +283,69 @@ git svn clone file:///opt/svn.repo.loc --no-metadata --trunk=trunk draft.repo
 [/note]
 
 [slide]
+# 练习1
+```
+# 目录结构
+git
+  |-remote
+      |-test1 #repo1
+      |-test2 #repo2
+  |-local
+      |-test1 #repo1
+      |-test2 #repo2
+
+cd /d/git/remote/test1
+git init --bare
+cd /d/git/local
+git clone file:///d/git/remote/test1
+
+cd test1
+echo "hello" > readme.txt
+git status
+git add readme.txt
+git status
+git commit -m "add readme.txt"
+git push
+```
+
+[note]
+[/note]
+
+[slide]
+# 练习2
+```
+git config --global http.sslVerify false # 解决证书不被信任问题
+cd /d/git/local
+git clone https://test1@192.168.35.13:978/ttchao/testx.git
+
+cd testx
+echo "hello" >> README.md
+git diff
+git commit -am "update README.md"
+git push
+git pull
+git status
+git remote -v
+git log1
+```
+[note]
+[/note]
+
+[slide]
+# 练习3 IDEA
+- ctrl+k: commit
+- ctrl+shift+k: push
+- ctrl+t: update
+- conflicts deal
+- switch branch
+- create branch
+
+[note]
+[/note]
+
+[slide]
 # 高级用法-git-crypt
-- (git-crypt](https://www.jianshu.com/p/a40fc90df943) and [gpg](https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html)
+- [git-crypt](https://www.jianshu.com/p/a40fc90df943) and [gpg](https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html)
 ```
 #install
 brew install git-crypt
