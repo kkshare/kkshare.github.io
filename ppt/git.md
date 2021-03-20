@@ -62,15 +62,8 @@ theme: dark
 # Git基础
 - 近乎所有操作都是本地执行
 - 保证完整性:数据库信息以文件内容的哈希值来索引(不是文件名)
-- 三个工作区域的概念：Git仓库、工作目录以及暂存(索引)区域  
+- 三个工作区域的概念：Git仓库、工作目录以及暂存区域  
 ![](/img/areas.version.png)
-
-[slide]
-# Git基本工作流程
-- 在工作目录中修改文件
-- 暂存文件，将文件的快照放入暂存区域
-- 提交更新，将暂存区域的文件快照永久性存储到本地仓库
-- 仓库同步,分支合并（可选）
 
 [slide]
 # 安装
@@ -90,42 +83,23 @@ theme: dark
 
 [slide]
 # 创建仓库
-- 创建纯本地仓库
+- 创建裸仓库(远程仓库)
 ```bash
-mkdir myrepo;cd myrepo
-git init
+git init --bare myrepo # myrepo为仓库名字
 ```
 - 创建与远程仓库关联(跟踪)的本地仓库
 ```bash
-git clone https://ebentest@github.com/ebentest/ppt.git
-git clone git@github.com:ebentest/ppt.git          #SSH
-git clone ssh://192.168.0.22:2000/path/to/git      #ssh+git
+git clone file:///path/to/local/repo
+git clone https://user@github.com/proj/ppt.git
+git clone git@github.com:proj/ppt.git          #SSH
+git clone ssh://192.168.0.22:2000/path/to/git  #ssh+git
 ```
 
 [slide]
-# 更新文件
-```bash
-cd myppt;echo "hello">>README
-git status                   #检查文件状态
-git add README               #跟踪新文件
-git commit -m "first commit" #提交更新
-git push origin master       #推送到远程仓库
-```
-- 文件状态变化周期  
+# 文件状态变化
+
 ![](/img/lifecycle.version.png)
 
-[note]
-password:123qwert
-[/note]
-
-[slide]
-# 文件状态变化周期
-![](/img/lifecycle.version.png)
-- git add
- * 开始跟踪新文件，
- * 把已跟踪的文件放到暂存区，
- * 合并时把有冲突的文件标记为已解决状态等
-- 跳过暂存区域直接提交:`git commit -a -m "x"` 
 
 [slide]
 # 远程仓库
@@ -139,13 +113,7 @@ origin  https://ebentest@github.com/ebentest/ppt.git (push)
 ```
  * origin是克隆远程仓库时的默认名字
  * 本地仓库没有名字，但有默认分支master
-- 添加远程仓库: git remote add <shortname> <url>
-```bash
-git remote add ppt https://ebentest@github.com/ebentest/ppt.git
-git fetch ppt           #使用ppt代替整个URL
-git checkout ppt/master #切换到远程仓库ppt的master分支
-```
- * 只有fetch是联网操作，其它是本地操作
+ * pull/fetch/push是联网操作，其它是本地操作
  * 注意区分仓库名字与分支名字
 
 [slide]
@@ -234,6 +202,8 @@ https://{username}:{password}@github.com
     git config --global credential.helper store
 可以看到~/.gitconfig文件，会多了一项：
     helper = store
+[/note]
+
 [slide]
 # 别名
 ```bash
@@ -287,18 +257,18 @@ git svn clone file:///opt/svn.repo.loc --no-metadata --trunk=trunk draft.repo
 ```
 # 目录结构
 git
-  |-remote
-      |-test1 #repo1
-      |-test2 #repo2
-  |-local
-      |-test1 #repo1
-      |-test2 #repo2
+|-remote
+  |-test1 #远程仓库1
+  |-test2 #远程仓库2
+|-local
+  |-test1 #本地仓库1
+  |-test2 #本地仓库2
 
-cd /d/git/remote/test1
-git init --bare
+cd /d/git/remote
+git init --bare test1
+
 cd /d/git/local
 git clone file:///d/git/remote/test1
-
 cd test1
 echo "hello" > readme.txt
 git status
@@ -346,6 +316,7 @@ git log1
 [slide]
 # 高级用法-git-crypt
 - [git-crypt](https://www.jianshu.com/p/a40fc90df943) and [gpg](https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html)
+
 ```
 #install
 brew install git-crypt
@@ -371,8 +342,8 @@ git push
 git-crypt export-key /path/to/git-crypt-key
 git-crypt unlock /path/to/git-crypt-key
 ```
+ * end of ppt,thanks! {:&.rollIn}
 
 [note]
 [/note]
 
- * end of ppt,thanks! {:&.rollIn}

@@ -155,17 +155,7 @@ title : "Git基本工作原理与常用命令 - By kk"
 <ul>
 <li>近乎所有操作都是本地执行</li>
 <li>保证完整性:数据库信息以文件内容的哈希值来索引(不是文件名)</li>
-<li>三个工作区域的概念：Git仓库、工作目录以及暂存(索引)区域<br><img src="./img/areas.version.png" alt=""></li>
-</ul>
-
-</article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>Git基本工作流程</h1>
-<ul>
-<li>在工作目录中修改文件</li>
-<li>暂存文件，将文件的快照放入暂存区域</li>
-<li>提交更新，将暂存区域的文件快照永久性存储到本地仓库</li>
-<li>仓库同步,分支合并（可选）</li>
+<li>三个工作区域的概念：Git仓库、工作目录以及暂存区域<br><img src="./img/areas.version.png" alt=""></li>
 </ul>
 
 </article></section></slide>
@@ -195,48 +185,21 @@ title : "Git基本工作原理与常用命令 - By kk"
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>创建仓库</h1>
 <ul>
-<li>创建纯本地仓库<pre><code class="bash">mkdir myrepo;cd myrepo
-git init
+<li>创建裸仓库(远程仓库)<pre><code class="bash">git init --bare myrepo # myrepo为仓库名字
 </code></pre>
 </li>
-<li>创建与远程仓库关联(跟踪)的本地仓库<pre><code class="bash">git clone https://ebentest@github.com/ebentest/ppt.git
-git clone git@github.com:ebentest/ppt.git          #SSH
-git clone ssh://192.168.0.22:2000/path/to/git      #ssh+git
+<li>创建与远程仓库关联(跟踪)的本地仓库<pre><code class="bash">git clone file:///path/to/local/repo
+git clone https://user@github.com/proj/ppt.git
+git clone git@github.com:proj/ppt.git          #SSH
+git clone ssh://192.168.0.22:2000/path/to/git  #ssh+git
 </code></pre>
 </li>
-</ul>
-
-</article></section></slide>
-<slide class="slide hasnote"><aside class="note">
-<section>
-<p>password:123qwert</p>
-
-</section>
-</aside><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>更新文件</h1>
-<pre><code class="bash">cd myppt;echo &quot;hello&quot;&gt;&gt;README
-git status                   #检查文件状态
-git add README               #跟踪新文件
-git commit -m &quot;first commit&quot; #提交更新
-git push origin master       #推送到远程仓库
-</code></pre>
-<ul>
-<li>文件状态变化周期<br><img src="./img/lifecycle.version.png" alt=""></li>
 </ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
-<h1>文件状态变化周期</h1>
+<h1>文件状态变化</h1>
 <img src="./img/lifecycle.version.png" alt="">
-<ul>
-<li>git add<ul>
-<li>开始跟踪新文件，</li>
-<li>把已跟踪的文件放到暂存区，</li>
-<li>合并时把有冲突的文件标记为已解决状态等</li>
-</ul>
-</li>
-<li>跳过暂存区域直接提交:<code>git commit -a -m &quot;x&quot;</code></li>
-</ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
@@ -251,14 +214,7 @@ origin  https://ebentest@github.com/ebentest/ppt.git (push)
 <ul>
 <li>origin是克隆远程仓库时的默认名字</li>
 <li>本地仓库没有名字，但有默认分支master</li>
-</ul>
-</li>
-<li>添加远程仓库: git remote add <shortname> <url><pre><code class="bash">git remote add ppt https://ebentest@github.com/ebentest/ppt.git
-git fetch ppt           #使用ppt代替整个URL
-git checkout ppt/master #切换到远程仓库ppt的master分支
-</code></pre>
-<ul>
-<li>只有fetch是联网操作，其它是本地操作</li>
+<li>pull/fetch/push是联网操作，其它是本地操作</li>
 <li>注意区分仓库名字与分支名字</li>
 </ul>
 </li>
@@ -351,7 +307,17 @@ git push [remote-name] [branch-name]
 </ul>
 
 </article></section></slide>
-<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>无密码登录
+vim .git-credentials
+<a href="https://{username}:{password}@github.com" target="_blank">https://{username}:{password}@github.com</a>
+    git config --global credential.helper store
+可以看到~/.gitconfig文件，会多了一项：
+    helper = store</p>
+
+</section>
+</aside><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>变量配置</h1>
 <ul>
 <li>每台计算机上只需要配置一次，程序升级时会保留配置信息</li>
@@ -363,13 +329,7 @@ git config --global core.editor vim
 git config --list 列出所有配置,检查配置
 git config core.quotepath false 文件名中文显示
 </code></pre>
-[note]
-无密码登录
-vim .git-credentials
-<a href="https://{username}:{password}@github.com" target="_blank">https://{username}:{password}@github.com</a>
-  git config --global credential.helper store
-可以看到~/.gitconfig文件，会多了一项：
-  helper = store</li>
+</li>
 </ul>
 
 </article></section></slide>
@@ -435,18 +395,18 @@ $ man git-&lt;verb&gt;
 <h1>练习1</h1>
 <pre><code># 目录结构
 git
-  |-remote
-      |-test1 #repo1
-      |-test2 #repo2
-  |-local
-      |-test1 #repo1
-      |-test2 #repo2
+|-remote
+  |-test1 #远程仓库1
+  |-test2 #远程仓库2
+|-local
+  |-test1 #本地仓库1
+  |-test2 #本地仓库2
 
-cd /d/git/remote/test1
-git init --bare
+cd /d/git/remote
+git init --bare test1
+
 cd /d/git/local
 git clone file:///d/git/remote/test1
-
 cd test1
 echo &quot;hello&quot; &gt; readme.txt
 git status
@@ -488,8 +448,9 @@ git log1
 <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
 <h1>高级用法-git-crypt</h1>
 <ul>
-<li><a href="https://www.jianshu.com/p/a40fc90df943" target="_blank">git-crypt</a> and <a href="https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html" target="_blank">gpg</a>
-```<h1>install</h1>
+<li><a href="https://www.jianshu.com/p/a40fc90df943" target="_blank">git-crypt</a> and <a href="https://www.cnblogs.com/wanghongli/archive/2018/01/08/8241809.html" target="_blank">gpg</a></li>
+</ul>
+<pre><code>#install
 brew install git-crypt
 brew install gpg
 #
@@ -499,19 +460,20 @@ gpg --edit-key [key]   #获取ID 交互方式修改expire
 gpg --delete-secret-and-public-key [ID] 
 cd path/to/project
 git-crypt init                 #初始化
-git-crypt add-gpg-user hetq    # 添加密钥用户，这里以用户hetq为例，可以添加多个用户<h1>将公钥放到 .git-crypt/keys/default/0/*.gpg</h1>
+git-crypt add-gpg-user hetq    # 添加密钥用户，这里以用户hetq为例，可以添加多个用户
+                               #将公钥放到 .git-crypt/keys/default/0/*.gpg
 vim .gitattributes
 enc/a.conf filter=git-crypt diff=git-crypt
-enc/b.conf filter=git-crypt diff=git-crypt</li>
-</ul>
-<p>git rm -r --cached enc/     #清理config的git缓存
+enc/b.conf filter=git-crypt diff=git-crypt
+
+git rm -r --cached enc/     #清理config的git缓存
 git add .
 git commit -m &#39;git-crypt&#39;
-git push</p>
-<p>git-crypt export-key /path/to/git-crypt-key
+git push
+
+git-crypt export-key /path/to/git-crypt-key
 git-crypt unlock /path/to/git-crypt-key
-```</p>
-<ul class="rollIn">
+</code></pre><ul class="rollIn">
 <li>end of ppt,thanks!</li>
 </ul>
 
